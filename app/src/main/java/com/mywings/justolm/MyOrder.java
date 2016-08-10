@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mywings.justolm.Binder.MyOrdersAdminAdapter;
 import com.mywings.justolm.Binder.PendingOrdersAdminAdapter;
 import com.mywings.justolm.Binder.UserOrderAdapter;
 import com.mywings.justolm.Model.Order;
@@ -30,7 +31,7 @@ public class MyOrder extends JustOlmCompactActivity
     private DrawerLayout drawer;
     private RecyclerView lstPendingOrders;
     private UserOrderAdapter pendingOrdersAdapter;
-    private PendingOrdersAdminAdapter pendingOrdersAdminAdapter;
+    private MyOrdersAdminAdapter pendingOrdersAdminAdapter;
     private Dialog dialog;
     //endregion
 
@@ -253,10 +254,10 @@ public class MyOrder extends JustOlmCompactActivity
     private void setData(final List<Order> orders, boolean isadmin) {
         if (isadmin) {
 
-            pendingOrdersAdminAdapter = new PendingOrdersAdminAdapter(this, orders);
+            pendingOrdersAdminAdapter = new MyOrdersAdminAdapter(this, orders);
 
             pendingOrdersAdapter = new UserOrderAdapter(this, orders);
-            pendingOrdersAdminAdapter.setOnItemClickListener(new PendingOrdersAdminAdapter.OnItemClickListener() {
+            pendingOrdersAdminAdapter.setOnItemClickListener(new MyOrdersAdminAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int id) {
                     orderDetail = orders.get(id);
