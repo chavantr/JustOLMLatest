@@ -1,0 +1,150 @@
+<resources>
+    <string name="app_name">JustOLM</string>
+
+    <string name="prompt_email">Enter your email/username</string>
+    <string name="prompt_password">Enter password</string>
+    <string name="action_sign_in">Sign In </string>
+    <string name="action_register">Register </string>
+    <string name="action_login_admin"><u>Admin Login</u></string>
+    <string name="action_forgot_password"><u>Forgot Password?</u></string>
+    <string name="action_sign_in_short">Sign In</string>
+    <string name="action_ok">OK</string>
+    <string name="enter_valid_email">Please enter valid email.</string>
+    <string name="enter_username_password">Please enter valid username and password.</string>
+    <string name="internect_connectivity">There is no internet connection,Please check your internet settings.</string>
+    <string name="create_new_account">Create New Account</string>
+    <string name="first_name"><font color='red' size='20'>* </font>First Name :</string>
+    <string name="enter_first_name">Enter first name</string>
+
+    <string name="middle_name"><font color='red' size='20'>* </font>Middle Name :</string>
+    <string name="enter_middle_name">Enter middle name</string>
+
+
+    <string name="last_name"><font color='red' size='20'>* </font>Last Name :</string>
+    <string name="enter_last_name">Enter last name</string>
+
+
+    <string name="date_of_birth"><font color='red' size='20'>* </font>Date Of Birth :</string>
+    <string name="select_date_of_birth">Select your date of birth</string>
+
+
+    <string name="gender"><font color='red' size='20'>* </font>Gender :</string>
+
+
+    <string name="profession"><font color='red' size='20'>* </font>Profession :</string>
+    <string name="enter_profession">Enter your profession</string>
+
+
+    <string name="address"><font color='red' size='20'>* </font>Address :</string>
+    <string name="enter_address">Enter postal address</string>
+
+
+    <string name="country"><font color='red' size='20'>* </font>Country :</string>
+    <string name="pin_code"><font color='red' size='20'>* </font>Pin Code :</string>
+    <string name="enter_pin_code">Enter pin code</string>
+    <string name="email_registration"><font color='red' size='20'>* </font>Email :</string>
+    <string name="enter_email_id">Enter email id</string>
+    <string name="mobile"><font color='red' size='20'>* </font>Mobile :</string>
+    <string name="security_code"><font color='red' size='20'>* </font>Security Code :</string>
+    <string name="enter_code">Enter code</string>
+    <string name="create_password"><font color='red' size='20'>* </font>Create Password :</string>
+    <string name="enter_password">Enter password</string>
+    <string name="confirm_password"><font color='red' size='20'>* </font>Confirm Password :</string>
+    <string name="create_account">   Create Account   </string>
+    <string name="state"><font color='red' size='20'>* </font>State :</string>
+    <string name="city"><font color='red' size='20'>* </font>City :</string>
+    <string name="enter_city">Enter city</string>
+    <string name="action_all_fields_mandetory">All (*) fields are mandatory</string>
+    <string name="select_gender">Select gender</string>
+    <string name="enter_valid_ten_digit_number">Please enter valid 10 digit mobile number.</string>
+    <string name="security_code_not_match">Security code does not matched,Please enter valid security code.</string>
+    <string name="enter_minimum_eight">Password should be minimum 8 charachters.</string>
+    <string name="password_doesnot_match">Password doesn\'t match !</string>
+    <string name="please_accept_terms_conditions">Please accept terms and conditions.</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+
+
+
+
+
+
+
+
+    <array name="scheduler">
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </array>
+
+
+    <array name="status">
+        <item>Accept</item>
+        <item>Reject</item>
+        <item>Delivered</item>
+    </array>
+
+
+    <string name="title_activity_just_olmscreen">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_all">All</string>
+    <string name="action_pending_orders">Pending Orders</string>
+    <string name="action_accepted_orders">Accepted Orders</string>
+    <string name="action_rejected_orders">Rejected Orders</string>
+    <string name="action_delivered_orders">Delivered Orders</string>
+
+
+    <string name="title_activity_just_olm">Home</string>
+    <string name="title_activity_my_profile">My Profile</string>
+    <string name="action_update_profile">   Update Profile   </string>
+    <string name="edit">Edit</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="action_yes">YES</string>
+    <string name="action_no">NO</string>
+    <string name="acton_logout">Do you really want to logout?</string>
+    <string name="title_activity_about_us">About Us</string>
+    <string name="aboutus">Mega Software Solution is web Development Company and having its office in India (Pune). Mega Software Solution provides quality and affordable services of Web development, Software Development, Enterprise Portal solutions and all type of Application Software to various clients across the globe. Our company specialises in Enterprise Resource Planing customization and web development services.\nMega Software Solution is providing affordable,custom and quality Software Development services and web design across the world with latest and emerging Web Technologies. Mega Software Solutions invites to its website visitors to outside their Web Design.Web Development services, Software Development and Android projects with us and save there money because we providing affordable and quality Software development and Web application service. Mega Software Solutions has a result - oriented team under one roof that comprises of Software / Web Consultants, Creative Designers, Developers, Content Writers, Programmers, Software Developers and Marketing professionals. Our team has flexibility to work with the clients in a way that meet client objectives. We provide extensive customer support to ensure clients satisfaction with the design , functionality and result expected from the solutions. </string>
+    <string name="title_activity_contact_us">Contact Us</string>
+    <string name="data_not_available">Data not available</string>
+    <string name="title_activity_new_order">New Order</string>
+    <string name="please_insure_that_all_prescribed_items_will_have_continues_serial_number">Please insure that all prescribed items will have continues serial number</string>
+    <string name="prefer_time_to_accept_delivery">Prefer time to \naccept delivery</string>
+    <string name="scheduler">Scheduler:</string>
+    <string name="title_activity_pending_order">Pending Order</string>
+    <string name="lbl_confirm_prescribed">Confirm Prescribed Items</string>
+    <string name="lbl_confirm_user">Do you really want to confirm prescribed items to order?</string>
+    <string name="title_activity_amend_order">Amend Order</string>
+    <string name="title_activity_amend_scheduler">Amend Scheduler</string>
+    <string name="done">Done</string>
+    <string name="title_activity_pending_order_details">Pending Order</string>
+    <string name="title_activity_amend_order_details">Amend Order</string>
+    <string name="title_activity_change_password">Change Password</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="new_order">New Order</string>
+    <string name="pending_order">Pending Order</string>
+    <string name="amend_order">Amend Order</string>
+    <string name="amend_schedule_order">Amend Schedule Order</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="about_us">About Us</string>
+    <string name="change_password">Change Password</string>
+    <string name="logout">Logout</string>
+    <string name="my_orders">My Orders</string>
+    <string name="all_orders">All Orders</string>
+    <string name="title_activity_my_order">My Order</string>
+    <string name="lbl_pending_status">Pending</string>
+    <string name="title_activity_my_order_details">Order Detail</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_amend_schedule_details">Amend Schedule Order</string>
+    <string name="lbl_more_than_16_qty">Quantity not allowed more than 16.</string>
+
+
+</resources>

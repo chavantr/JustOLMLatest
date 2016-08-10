@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_all"
+        android:orderInCategory="100"
+        android:title="@string/action_all"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_pending"
+        android:orderInCategory="101"
+        android:title="@string/action_pending_orders"
+        app:showAsAction="never" />
+
+
+    <item
+        android:id="@+id/action_accepted"
+        android:orderInCategory="102"
+        android:title="@string/action_accepted_orders"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_rejected"
+        android:orderInCategory="103"
+        android:title="@string/action_rejected_orders"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_delivered"
+        android:orderInCategory="104"
+        android:title="@string/action_delivered_orders"
+        app:showAsAction="never" />
+
+</menu>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/menu_icons_home"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/profile"
+            android:icon="@drawable/menu_icons_profile"
+            android:title="@string/profile" />
+
+        <item
+            android:id="@+id/neworder"
+            android:icon="@drawable/menu_icons_new_order"
+            android:title="@string/new_order" />
+
+        <item
+            android:id="@+id/pendingorder"
+            android:icon="@drawable/menu_icons_pending"
+            android:title="@string/pending_order" />
+
+        <item
+            android:id="@+id/userorder"
+            android:icon="@drawable/menu_icons_new_order"
+            android:title="@string/my_orders" />
+
+
+        <item
+            android:id="@+id/amendorder"
+            android:icon="@drawable/menu_icons_amend_order"
+            android:title="@string/amend_order" />
+
+
+        <item
+            android:id="@+id/amendschedulerorder"
+            android:icon="@drawable/menu_icons_amend_scheduler"
+            android:title="@string/amend_schedule_order" />
+
+        <item
+            android:id="@+id/contactus"
+            android:icon="@drawable/menu_icons_contact_us"
+            android:title="@string/contact_us" />
+
+
+        <item
+            android:id="@+id/abountus"
+            android:icon="@drawable/menu_icons_about_us"
+            android:title="@string/about_us" />
+
+
+        <item
+            android:id="@+id/changepassword"
+            android:icon="@drawable/menu_icons_password"
+            android:title="@string/change_password" />
+
+
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/menu_icons_logout"
+            android:title="@string/logout" />
+
+    </group>
+
+
+</menu>

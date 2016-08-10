@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/panel"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginBottom="2dp"
+    android:layout_marginTop="2dp"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="15.5"
+            android:orientation="vertical"
+            android:weightSum="10">
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblIndex"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="9.9"
+                android:gravity="center"
+                android:text="5"
+                android:textColor="@android:color/black" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.1"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:background="@android:color/darker_gray" />
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="84">
+
+            <RelativeLayout
+                android:id="@+id/rlName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txtName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txtQty"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="9dp"
+                    android:gravity="center"
+                    android:maxLength="2"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlScheduler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlName"
+                android:gravity="center_vertical"
+                android:padding="5dp">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/lblScheduler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/scheduler"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txtScheduler"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/lblScheduler"
+                    android:gravity="left"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold">
+
+
+                </android.support.v7.widget.AppCompatTextView>
+
+
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rlTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlScheduler"
+                android:padding="3dp">
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/lblPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Period:"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/txtPeriod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="55dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toRightOf="@+id/lblPeriod"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:minWidth="9dp"
+                    android:text="1"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold">
+
+
+                </android.support.v7.widget.AppCompatTextView>
+
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/rlTime"
+                android:background="@android:color/darker_gray"
+                android:visibility="invisible" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+</android.support.v7.widget.CardView>

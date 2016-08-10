@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.mywings.justolm.Registration">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/first_name"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtFirstName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_first_name"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/middle_name"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtMiddleName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_middle_name"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/last_name"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtLastName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_last_name"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/date_of_birth"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtDateOfBirth"
+            style="@style/spinner_date_picker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:focusable="false"
+            android:hint="@string/select_date_of_birth"
+            android:paddingLeft="3dp"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/gender"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <RadioGroup
+            android:id="@+id/txtGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:orientation="horizontal"
+            android:textColor="@color/colorPrimaryTitle"
+            android:weightSum="100">
+
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10" />
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rdbMale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="43"
+                android:text="Male" />
+
+
+            <android.support.v7.widget.AppCompatRadioButton
+                android:id="@+id/rdbFemale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="50"
+                android:text="Female" />
+
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/profession"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtProfession"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_profession"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/address"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_address"
+            android:imeOptions="actionNext"
+            android:inputType="textCapWords"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/country"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <com.mywings.justolm.Widgets.SearchableSpinner
+            android:id="@+id/txtCountry"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorPrimaryTitle"
+            app:hintText="Select country" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/state"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <com.mywings.justolm.Widgets.SearchableSpinner
+            android:id="@+id/txtState"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorPrimaryTitle"
+
+            app:hintText="Select state" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/city"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <com.mywings.justolm.Widgets.SearchableSpinner
+            android:id="@+id/txtCity"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorPrimaryTitle"
+
+            app:hintText="Select city" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Area :"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <com.mywings.justolm.Widgets.SearchableSpinner
+            android:id="@+id/txtArea"
+            style="@style/spinner_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/colorPrimaryTitle"
+
+            app:hintText="Select area" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/pin_code"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtPinCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_pin_code"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="6"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/email_registration"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_email_id"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/mobile"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtMobileNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="Enter mobile number"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="10"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/security_code"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:weightSum="100">
+
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/lblSecurityCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2.5dp"
+                android:layout_weight="50"
+                android:background="@drawable/code_bg"
+                android:focusable="false"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/txtSecurityCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.5dp"
+                android:layout_weight="50"
+                android:background="@drawable/login_controlshape_"
+                android:ellipsize="end"
+                android:hint="@string/enter_code"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/colorPrimaryTitle" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/create_password"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:ellipsize="end"
+            android:hint="@string/enter_password"
+
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:singleLine="true"
+
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/confirm_password"
+            android:textColor="@color/colorPrimaryTitle"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/txtConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/login_controlshape_"
+            android:hint="Re-enter password"
+            android:imeActionId="@+id/btnCreateAccount"
+            android:imeActionLabel="@string/create_account"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:singleLine="true"
+            android:textColor="@color/colorPrimaryTitle" />
+
+
+        <android.support.v7.widget.AppCompatCheckBox
+            android:id="@+id/chkTermsAndConditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="Terms and Conditions"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
+
+
+        <Button
+            android:id="@+id/btnCreateAccount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="65dp"
+            android:layout_marginRight="65dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/create_account"
+            android:textAllCaps="false" />
+
+
+    </LinearLayout>
+
+
+</ScrollView>
