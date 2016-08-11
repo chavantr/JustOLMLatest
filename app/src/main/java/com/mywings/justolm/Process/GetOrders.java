@@ -11,6 +11,7 @@ import com.mywings.justolm.NetworkUtils.GatheredServerClientException;
 import com.mywings.justolm.NetworkUtils.MissingBasicClientFunctionalityException;
 import com.mywings.justolm.NetworkUtils.ServiceFunctions;
 import com.mywings.justolm.Utilities.Constants;
+import com.mywings.justolm.Utilities.DateUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -79,7 +80,7 @@ public class GetOrders extends AsyncTask<Context, Void, List<Order>> {
                     Order order = new Order();
                     order.setActionDelete(false);
                     order.setConfirmDeleted(false);
-                    order.setCreatedAt(jsonArray.getJSONObject(i).getString(Constants.ORDER_DATE));
+                    order.setCreatedAt(DateUtils.parse(jsonArray.getJSONObject(i).getString(Constants.ORDER_DATE).split(" ")[0]) + " " + jsonArray.getJSONObject(i).getString(Constants.ORDER_TIME));
                     order.setId(jsonArray.getJSONObject(i).getString(Constants.ORDER_ID));
                     order.setTypeId(jsonArray.getJSONObject(i).getString(Constants.ORDER_TYPE));
                     order.setOrderStatusId(jsonArray.getJSONObject(i).getString(Constants.STATUS_ID));

@@ -141,5 +141,6 @@
     <string name="lbl_more_than_16_qty">Quantity not allowed more than 16.</string>
     <string name="order">Order</string>
     <string name="confirmation_">You don\'t have items under this order so your order will be deleted automatically, Do you really want to delete this order?</string>
+    <string name="quantity">Quantity :</string>
 
 </resources>

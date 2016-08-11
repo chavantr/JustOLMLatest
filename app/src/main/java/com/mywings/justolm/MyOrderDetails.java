@@ -15,14 +15,12 @@ import com.mywings.justolm.Process.OnDeleteListener;
 
 public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteListener {
 
-
     //region
     private AppCompatTextView lblOrderDate;
     private AppCompatTextView lblOrderNumber;
     private RecyclerView lstAmendOrderDetails;
     private UserOrderDetailAdapter amendOrderDetailAdapter;
     //endregion
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +32,8 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
         lblOrderDate = (AppCompatTextView) findViewById(R.id.lblOrderDate);
         lblOrderNumber = (AppCompatTextView) findViewById(R.id.lblOrderNo);
         lstAmendOrderDetails = (RecyclerView) findViewById(R.id.lstAmendOrderDetails);
-        lblOrderDate.setText("Order Date\n" + MyOrder.orderDetail.getCreatedAt());
-        lblOrderNumber.setText("Order No \n" + MyOrder.orderDetail.getId());
+        lblOrderDate.setText("   Order Date\n" + MyOrder.orderDetail.getCreatedAt().split(" ")[0]);
+        lblOrderNumber.setText("  Order No \n" + MyOrder.orderDetail.getId() + "   ");
         lstAmendOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         amendOrderDetailAdapter = new UserOrderDetailAdapter(MyOrder.orderDetail.getItems());
         lstAmendOrderDetails.setAdapter(amendOrderDetailAdapter);
@@ -70,11 +68,8 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
 
     @Override
     public void onDeleteComplete(UserMessage userMessage, Exception exception) {
-
         hide();
-
         if (null != userMessage && exception == null) {
-            // amendOrderDetailAdapter.orderDetails.remove()
             finish();
         } else {
             show(exception.getMessage(), getGroup());

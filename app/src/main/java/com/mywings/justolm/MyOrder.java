@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.mywings.justolm.Binder.PendingOrdersAdminAdapter;
 import com.mywings.justolm.Binder.UserOrderAdapter;
+import com.mywings.justolm.Binder.UserOrdersAdminAdapter;
 import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Process.GetOrders;
 import com.mywings.justolm.Process.OnOrderListener;
@@ -32,6 +33,7 @@ public class MyOrder extends JustOlmCompactActivity
     private RecyclerView lstPendingOrders;
     private UserOrderAdapter pendingOrdersAdapter;
     private PendingOrdersAdminAdapter pendingOrdersAdminAdapter;
+    private UserOrdersAdminAdapter userOrdersAdminAdapter;
     private Dialog dialog;
     //endregion
 
@@ -254,9 +256,8 @@ public class MyOrder extends JustOlmCompactActivity
 
     private void setData(final List<Order> orders, boolean isadmin) {
         if (isadmin) {
-            pendingOrdersAdminAdapter = new PendingOrdersAdminAdapter(this, orders);
-            //pendingOrdersAdapter = new UserOrderAdapter(this, orders);
-            pendingOrdersAdminAdapter.setOnItemClickListener(new PendingOrdersAdminAdapter.OnItemClickListener() {
+            userOrdersAdminAdapter = new UserOrdersAdminAdapter(this, orders);
+            userOrdersAdminAdapter.setOnItemClickListener(new UserOrdersAdminAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int id) {
                     orderDetail = orders.get(id);
@@ -266,7 +267,7 @@ public class MyOrder extends JustOlmCompactActivity
                     startActivity(intent);
                 }
             });
-            lstPendingOrders.setAdapter(pendingOrdersAdminAdapter);
+            lstPendingOrders.setAdapter(userOrdersAdminAdapter);
         } else {
             pendingOrdersAdapter = new UserOrderAdapter(this, orders);
             pendingOrdersAdapter.setOnItemClickListener(new UserOrderAdapter.OnItemClickListener() {

@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="60"
-            android:gravity="center"
+            android:paddingLeft="7dp"
             android:text="  Order Date \n 01/02/2016"
             android:textColor="@color/colorPrimaryTitle"
             android:textStyle="bold" />
@@ -38,7 +38,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="40"
-            android:gravity="center"
+            android:gravity="right"
+            android:paddingRight="7dp"
             android:text="   Order No \n 0123456897"
             android:textColor="@color/colorPrimaryTitle"
             android:textStyle="bold" />
@@ -60,12 +61,56 @@
         android:textStyle="bold" />
 
 
+    <RelativeLayout
+        android:id="@+id/lnrHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lblPreferTime"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorAccent"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="Sr.No"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            android:padding="4dp"
+            android:text="Item Name"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="4dp"
+            android:padding="4dp"
+            android:text="Qty"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/lstAmendOrderDetails"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/lnrBottonActionBar"
-        android:layout_below="@+id/lblPreferTime"
+        android:layout_below="@+id/lnrHeader"
         android:layout_marginTop="5dp">
 
 
