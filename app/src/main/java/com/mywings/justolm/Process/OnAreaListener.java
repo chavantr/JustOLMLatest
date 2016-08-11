@@ -8,5 +8,5 @@ import java.util.List;
  * Created by Tatyabhau on 6/26/2016.
  */
 public interface OnAreaListener {
-    public void onAreaComplete(List<Area> result,Exception exception);
+     void onAreaComplete(List<Area> result,Exception exception);
 }

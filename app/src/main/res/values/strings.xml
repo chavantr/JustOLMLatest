@@ -66,12 +66,6 @@
     <string name="forgot_password">Forgot Password?</string>
 
 
-
-
-
-
-
-
     <array name="scheduler">
         <item>Weekly</item>
         <item>Monthly</item>
@@ -114,14 +108,14 @@
     <string name="please_insure_that_all_prescribed_items_will_have_continues_serial_number">Please insure that all prescribed items will have continues serial number</string>
     <string name="prefer_time_to_accept_delivery">Prefer time to \naccept delivery</string>
     <string name="scheduler">Scheduler:</string>
-    <string name="title_activity_pending_order">Pending Order</string>
+    <string name="title_activity_pending_order">Pending Orders</string>
     <string name="lbl_confirm_prescribed">Confirm Prescribed Items</string>
     <string name="lbl_confirm_user">Do you really want to confirm prescribed items to order?</string>
     <string name="title_activity_amend_order">Amend Order</string>
     <string name="title_activity_amend_scheduler">Amend Scheduler</string>
     <string name="done">Done</string>
-    <string name="title_activity_pending_order_details">Pending Order</string>
-    <string name="title_activity_amend_order_details">Amend Order</string>
+    <string name="title_activity_pending_order_details">Order Details</string>
+    <string name="title_activity_amend_order_details">Edit Order</string>
     <string name="title_activity_change_password">Change Password</string>
 
     <string name="title_activity_splash_screen">SplashScreen</string>
@@ -130,7 +124,7 @@
     <string name="home">Home</string>
     <string name="profile">Profile</string>
     <string name="new_order">New Order</string>
-    <string name="pending_order">Pending Order</string>
+    <string name="pending_order">Pending Orders</string>
     <string name="amend_order">Amend Order</string>
     <string name="amend_schedule_order">Amend Schedule Order</string>
     <string name="contact_us">Contact Us</string>
@@ -139,12 +133,13 @@
     <string name="logout">Logout</string>
     <string name="my_orders">My Orders</string>
     <string name="all_orders">All Orders</string>
-    <string name="title_activity_my_order">My Order</string>
+    <string name="title_activity_my_order">My Orders</string>
     <string name="lbl_pending_status">Pending</string>
-    <string name="title_activity_my_order_details">Order Detail</string>
+    <string name="title_activity_my_order_details">Order Details</string>
     <string name="delete">Delete</string>
     <string name="title_activity_amend_schedule_details">Amend Schedule Order</string>
     <string name="lbl_more_than_16_qty">Quantity not allowed more than 16.</string>
-
+    <string name="order">Order</string>
+    <string name="confirmation_">You don\'t have items under this order so your order will be deleted automatically, Do you really want to delete this order?</string>
 
 </resources>

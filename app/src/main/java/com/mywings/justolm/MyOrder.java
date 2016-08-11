@@ -13,13 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.mywings.justolm.Binder.MyOrdersAdminAdapter;
 import com.mywings.justolm.Binder.PendingOrdersAdminAdapter;
 import com.mywings.justolm.Binder.UserOrderAdapter;
 import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Process.GetOrders;
 import com.mywings.justolm.Process.OnOrderListener;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MyOrder extends JustOlmCompactActivity
@@ -31,7 +31,7 @@ public class MyOrder extends JustOlmCompactActivity
     private DrawerLayout drawer;
     private RecyclerView lstPendingOrders;
     private UserOrderAdapter pendingOrdersAdapter;
-    private MyOrdersAdminAdapter pendingOrdersAdminAdapter;
+    private PendingOrdersAdminAdapter pendingOrdersAdminAdapter;
     private Dialog dialog;
     //endregion
 
@@ -244,6 +244,7 @@ public class MyOrder extends JustOlmCompactActivity
     public void onOrderComplete(List<Order> result, boolean isadmin, Exception exception) {
         hide();
         if (null != result && exception == null) {
+            Collections.sort(result, new IdComparator());
             setData(result, isadmin);
         } else {
             show(exception.getMessage(), lstPendingOrders);
@@ -253,21 +254,19 @@ public class MyOrder extends JustOlmCompactActivity
 
     private void setData(final List<Order> orders, boolean isadmin) {
         if (isadmin) {
-
-            pendingOrdersAdminAdapter = new MyOrdersAdminAdapter(this, orders);
-
-            pendingOrdersAdapter = new UserOrderAdapter(this, orders);
-            pendingOrdersAdminAdapter.setOnItemClickListener(new MyOrdersAdminAdapter.OnItemClickListener() {
+            pendingOrdersAdminAdapter = new PendingOrdersAdminAdapter(this, orders);
+            //pendingOrdersAdapter = new UserOrderAdapter(this, orders);
+            pendingOrdersAdminAdapter.setOnItemClickListener(new PendingOrdersAdminAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int id) {
                     orderDetail = orders.get(id);
                     Intent intent = new Intent(MyOrder.this, MyOrderDetails.class);
+                    intent.putExtra("isdelete", orders.get(id).getOrderStatusName());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                 }
             });
             lstPendingOrders.setAdapter(pendingOrdersAdminAdapter);
-
         } else {
             pendingOrdersAdapter = new UserOrderAdapter(this, orders);
             pendingOrdersAdapter.setOnItemClickListener(new UserOrderAdapter.OnItemClickListener() {
@@ -275,6 +274,7 @@ public class MyOrder extends JustOlmCompactActivity
                 public void onItemClick(int id) {
                     orderDetail = orders.get(id);
                     Intent intent = new Intent(MyOrder.this, MyOrderDetails.class);
+                    intent.putExtra("isdelete", orders.get(id).getOrderStatusName());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
                 }

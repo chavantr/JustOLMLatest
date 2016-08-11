@@ -107,4 +107,12 @@ public class Order {
         this.confirmDeleted = confirmDeleted;
     }
 
+
+   /* @Override
+    public int compare(Order lhs, Order rhs) {
+        if (Integer.parseInt(lhs.getId()) < Integer.parseInt(rhs.getId())){
+            return 1 ;
+        }
+        return 0;
+    }*/
 }

@@ -136,6 +136,7 @@ public class AmendSchedulerOrderDetailsAdapter extends RecyclerView.Adapter<Amen
             txtPeriod = (AppCompatEditText) itemView.findViewById(R.id.txtPeriod);
             txtQty = (AppCompatTextView) itemView.findViewById(R.id.txtQty);
             imgDeleteIcon = (AppCompatImageView) itemView.findViewById(R.id.imgDeleteIcon);
+            //txtPeriod.setKeyListener(null);
         }
     }
 }

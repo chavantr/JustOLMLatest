@@ -1,6 +1,9 @@
 package com.mywings.justolm;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -77,9 +80,14 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
      */
     private void initOrder(InitOrderRequest request) {
         if (isConnected()) {
-            show();
-            InitOrder initOrder = initHelper.initOrder(serviceFunctions);
-            initOrder.setOnInitOrderListener(this, request);
+            if (request.getItems().size() <= 0) {
+                Dialog dialog = confirmation();
+                dialog.show();
+            } else {
+                show();
+                InitOrder initOrder = initHelper.initOrder(serviceFunctions);
+                initOrder.setOnInitOrderListener(this, request);
+            }
         }
     }
 
@@ -101,5 +109,30 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
         } else {
             show(exception.getMessage(), btnUpdate);
         }
+    }
+
+
+    /**
+     *
+     */
+    public Dialog confirmation() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.app_name));
+        builder.setMessage(getString(R.string.confirmation_));
+        builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.action_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        return builder.create();
     }
 }

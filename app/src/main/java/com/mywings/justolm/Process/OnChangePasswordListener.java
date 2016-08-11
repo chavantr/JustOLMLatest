@@ -6,5 +6,5 @@ import com.mywings.justolm.Model.UserMessage;
  * Created by Tatyabhau on 5/29/2016.
  */
 public interface OnChangePasswordListener {
-    public void onChangePasswordComplete(UserMessage result, Exception exception);
+     void onChangePasswordComplete(UserMessage result, Exception exception);
 }

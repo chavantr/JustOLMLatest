@@ -18,6 +18,7 @@ import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Process.GetOrders;
 import com.mywings.justolm.Process.OnOrderListener;
 
+import java.util.Collections;
 import java.util.List;
 
 public class AmendScheduler extends JustOlmCompactActivity
@@ -227,6 +228,7 @@ public class AmendScheduler extends JustOlmCompactActivity
     public void onOrderComplete(List<Order> result,boolean isadmin, Exception exception) {
         hide();
         if (null != result && exception == null) {
+            Collections.sort(result, new IdComparator());
             pendingOrdersAdapter = new PendingOrdersAdapter(result);
             pendingOrdersAdapter.setOnViewItemClickListener(new PendingOrdersAdapter.OnViewItemClickListener() {
                 @Override

@@ -8,9 +8,5 @@ import java.util.List;
  * Created by Tatyabhau on 6/26/2016.
  */
 public interface OnCityListener {
-
-    public void onCityComplete(List<City> result,Exception exception);
-
-
-
+    void onCityComplete(List<City> result, Exception exception);
 }

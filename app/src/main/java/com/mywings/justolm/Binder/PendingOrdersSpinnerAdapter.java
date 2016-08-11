@@ -64,7 +64,7 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
         if (orders.get(position).getTypeId().equalsIgnoreCase("1")) {
             holder.lblOrderType.setText("Order Type : " + "Prescribed");
         } else {
-            holder.lblOrderType.setText("Order Type : " + "Non prescribed");
+            holder.lblOrderType.setText("Order Type : " + "Non-prescribed");
         }
 
         if (orders.get(position).isActionDelete()) {

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import com.mywings.justolm.LocalUtils.JustOLMHelper;
+import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Model.Registration;
 import com.mywings.justolm.Model.UserInfo;
 import com.mywings.justolm.NetworkUtils.ServiceFunctions;
@@ -23,6 +24,8 @@ import com.mywings.justolm.Utilities.InitHelper;
 import com.mywings.justolm.Utilities.JustOLMShared;
 import com.mywings.justolm.Utilities.NetworkUtil;
 import com.mywings.justolm.Utilities.ValidationHelper;
+
+import java.util.Comparator;
 
 /**
  * Created by Tatyabhau Chavan on 5/17/2016.
@@ -194,5 +197,17 @@ public abstract class JustOlmCompactActivity extends AppCompatActivity implement
         registration.setEmail(justOLMShared.getStringValue("email"));
         registration.setMobileNumber(justOLMShared.getStringValue("mobile"));
         return registration;
+    }
+
+    public static class IdComparator implements Comparator<Order> {
+
+        @Override
+        public int compare(Order lhs, Order rhs) {
+
+            return (Integer.parseInt(lhs.getId()) > Integer.parseInt(rhs.getId())) ? -1 :
+                    (Integer.parseInt(lhs.getId()) < Integer.parseInt(rhs.getId())) ? 1 : 0;
+
+
+        }
     }
 }

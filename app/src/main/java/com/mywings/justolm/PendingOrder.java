@@ -22,6 +22,8 @@ import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Process.GetOrders;
 import com.mywings.justolm.Process.OnOrderListener;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PendingOrder extends JustOlmCompactActivity
@@ -289,9 +291,16 @@ public class PendingOrder extends JustOlmCompactActivity
     public void onOrderComplete(List<Order> result, boolean isadmin, Exception exception) {
         hide();
         if (null != result && exception == null) {
+
+            Collections.sort(result, new IdComparator());
+
             setData(result, isadmin);
         } else {
             show(exception.getMessage(), lstPendingOrders);
         }
     }
+
+
+
+
 }

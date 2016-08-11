@@ -72,42 +72,4 @@
     </android.support.v7.widget.RecyclerView>
 
 
-    <LinearLayout
-        android:id="@+id/lnrBottonActionBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:weightSum="100">
-
-        <Button
-            android:id="@+id/btnCancelOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:text="Cancel Order"
-            android:textAllCaps="false" />
-
-
-        <Button
-            android:id="@+id/btnUpdateOrder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Update Order"
-            android:textAllCaps="false"
-            android:visibility="gone" />
-
-
-        <Button
-            android:id="@+id/btnAcceptOrder"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:text="Accept Order"
-            android:textAllCaps="false" />
-
-
-    </LinearLayout>
-
-
 </RelativeLayout>

@@ -73,7 +73,8 @@ public class UserOrderDetailAdapter extends RecyclerView.Adapter<UserOrderDetail
             lblPeriod = (AppCompatTextView) itemView.findViewById(R.id.lblPeriod);
             txtQty = (AppCompatEditText) itemView.findViewById(R.id.txtQty);
             imgDeleteIcon = (AppCompatImageView) itemView.findViewById(R.id.imgDeleteIcon);
+            imgDeleteIcon.setVisibility(View.GONE);
+            txtQty.setKeyListener(null);
         }
     }
-
 }

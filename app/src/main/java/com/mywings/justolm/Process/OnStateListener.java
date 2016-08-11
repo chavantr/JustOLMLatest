@@ -8,5 +8,5 @@ import java.util.List;
  * Created by Tatyabhau on 6/26/2016.
  */
 public interface OnStateListener {
-    public void onStateComplete(List<State> result, Exception exception);
+    void onStateComplete(List<State> result, Exception exception);
 }

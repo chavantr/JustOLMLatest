@@ -6,7 +6,6 @@ import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,7 +72,7 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
         if (orders.get(position).getTypeId().equalsIgnoreCase("1")) {
             holder.lblOrderType.setText("Order Type : " + "Prescribed");
         } else {
-            holder.lblOrderType.setText("Order Type : " + "Non prescribed");
+            holder.lblOrderType.setText("Order Type : " + "Non-prescribed");
         }
 
         if (orders.get(position).isActionDelete()) {
@@ -121,7 +120,6 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
         holder.spnStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int index, long id) {
-
 
                 selectedPosition = position;
                 UpdateOrderAdmin updateOrderAdmin = new UpdateOrderAdmin();
@@ -174,6 +172,20 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
         notifyDataSetChanged();
     }
 
+    /**
+     * @param id
+     * @return
+     */
+    private int getSelectedPosition(String id) {
+
+        if (id.equalsIgnoreCase("2")) {
+            return 0;
+        } else if (id.equalsIgnoreCase("3")) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int id);
@@ -199,21 +211,6 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
             btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
             imgDeleteIcon = (AppCompatImageView) itemView.findViewById(R.id.imgDeleteIcon);
             panel = (CardView) itemView.findViewById(R.id.panel);
-        }
-    }
-
-    /**
-     * @param id
-     * @return
-     */
-    private int getSelectedPosition(String id) {
-
-        if (id.equalsIgnoreCase("2")) {
-            return 0;
-        } else if (id.equalsIgnoreCase("3")) {
-            return 1;
-        } else {
-            return 2;
         }
     }
 

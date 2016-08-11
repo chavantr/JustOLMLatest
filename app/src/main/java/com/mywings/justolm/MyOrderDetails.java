@@ -50,6 +50,13 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.ic_delete, menu);
+        if (getIntent().hasExtra("isdelete")) {
+            if (getIntent().getExtras().getString("isdelete").equalsIgnoreCase("Accepted")) {
+                MenuItem menuItem = menu.findItem(R.id.action_delete);
+                menuItem.setVisible(false);
+                invalidateOptionsMenu();
+            }
+        }
         return true;
     }
 
