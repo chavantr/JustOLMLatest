@@ -80,9 +80,11 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
         if (orders.get(position).isConfirmDeleted()) {
             holder.btnDelete.setVisibility(View.VISIBLE);
             holder.lnrStatus.setVisibility(View.GONE);
+            holder.btnView.setVisibility(View.GONE);
         } else {
             holder.btnDelete.setVisibility(View.GONE);
             holder.lnrStatus.setVisibility(View.VISIBLE);
+            holder.btnView.setVisibility(View.VISIBLE);
         }
 
         holder.imgDeleteIcon.setOnClickListener(new View.OnClickListener() {
@@ -140,8 +142,8 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
         AppCompatTextView lblOrderType;
         AppCompatTextView lblOrderStatus;
         LinearLayout lnrStatus;
-
         Button btnDelete;
+        Button btnView;
         AppCompatImageView imgDeleteIcon;
         CardView panel;
 
@@ -155,6 +157,7 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
             btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
             imgDeleteIcon = (AppCompatImageView) itemView.findViewById(R.id.imgDeleteIcon);
             panel = (CardView) itemView.findViewById(R.id.panel);
+            btnView = (Button) itemView.findViewById(R.id.btnView);
         }
     }
 }

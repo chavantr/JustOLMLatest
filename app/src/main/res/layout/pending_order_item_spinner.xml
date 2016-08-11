@@ -100,6 +100,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="7dp"
                 android:background="@drawable/forward"
                 android:textAllCaps="false" />
 

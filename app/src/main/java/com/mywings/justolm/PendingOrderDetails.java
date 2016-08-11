@@ -5,11 +5,16 @@ import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.mywings.justolm.Binder.PendingOrderView;
 import com.mywings.justolm.Model.Order;
+import com.mywings.justolm.Model.UserMessage;
+import com.mywings.justolm.Process.DeleteOrder;
+import com.mywings.justolm.Process.OnDeleteListener;
 
-public class PendingOrderDetails extends JustOlmCompactActivity {
+public class PendingOrderDetails extends JustOlmCompactActivity implements OnDeleteListener {
 
 
     public static Order order;
@@ -42,5 +47,44 @@ public class PendingOrderDetails extends JustOlmCompactActivity {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(flow);
         return linearLayoutManager;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.ic_delete, menu);
+        if (getIntent().hasExtra("isdelete")) {
+            if (getIntent().getExtras().getString("isdelete").equalsIgnoreCase("Accepted")) {
+                MenuItem menuItem = menu.findItem(R.id.action_delete);
+                menuItem.setVisible(false);
+                invalidateOptionsMenu();
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void onDeleteComplete(UserMessage userMessage, Exception exception) {
+        hide();
+        if (null != userMessage && exception == null) {
+            finish();
+        } else {
+            show(exception.getMessage(), getGroup());
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_delete) {
+            init(PendingOrder.orderDetail.getId());
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void init(String orderId) {
+        if (isConnected()) {
+            show();
+            DeleteOrder deleteOrder = initHelper.deleteOrder(serviceFunctions, String.valueOf(justOLMShared.getIntegerValue("userId")), orderId);
+            deleteOrder.setOnDeleteListener(this, this);
+        }
     }
 }

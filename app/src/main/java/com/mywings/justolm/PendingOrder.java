@@ -31,6 +31,7 @@ public class PendingOrder extends JustOlmCompactActivity
 
     //region UI Controls
     private DrawerLayout drawer;
+    public static Order orderDetail;
     private Dialog dialog;
     private RecyclerView lstPendingOrders;
     private PendingOrdersSpinnerAdapter pendingOrdersAdapter;
@@ -112,7 +113,7 @@ public class PendingOrder extends JustOlmCompactActivity
                 @Override
                 public void onItemClick(int id) {
                     PendingOrderDetails.order = orders.get(id);
-                    startpendingorderdetails();
+                    startpendingorderdetails(id, orders);
                 }
             });
             lstPendingOrders.setAdapter(pendingOrdersAdminAdapter);
@@ -124,15 +125,19 @@ public class PendingOrder extends JustOlmCompactActivity
                 @Override
                 public void onItemClick(int id) {
                     PendingOrderDetails.order = orders.get(id);
-                    startpendingorderdetails();
+                    startpendingorderdetails(id, orders);
                 }
             });
             lstPendingOrders.setAdapter(pendingOrdersAdapter);
         }
     }
 
-    private void startpendingorderdetails() {
+    private void startpendingorderdetails(int id, List<Order> orders) {
+
+        orderDetail = orders.get(id);
+
         Intent intent = new Intent(PendingOrder.this, PendingOrderDetails.class);
+        intent.putExtra("isdelete", orders.get(id).getOrderStatusName());
         startActivity(intent);
     }
 
@@ -299,8 +304,6 @@ public class PendingOrder extends JustOlmCompactActivity
             show(exception.getMessage(), lstPendingOrders);
         }
     }
-
-
 
 
 }
