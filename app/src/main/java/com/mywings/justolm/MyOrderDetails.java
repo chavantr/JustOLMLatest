@@ -20,6 +20,7 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
     private AppCompatTextView lblOrderNumber;
     private RecyclerView lstAmendOrderDetails;
     private UserOrderDetailAdapter amendOrderDetailAdapter;
+    private AppCompatTextView lblPreferTime;
     //endregion
 
     @Override
@@ -31,14 +32,20 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lblOrderDate = (AppCompatTextView) findViewById(R.id.lblOrderDate);
         lblOrderNumber = (AppCompatTextView) findViewById(R.id.lblOrderNo);
+        lblPreferTime = (AppCompatTextView) findViewById(R.id.lblPreferTime);
         lstAmendOrderDetails = (RecyclerView) findViewById(R.id.lstAmendOrderDetails);
         lblOrderDate.setText("   Order Date\n" + MyOrder.orderDetail.getCreatedAt().split(" ")[0]);
         lblOrderNumber.setText("  Order No \n" + MyOrder.orderDetail.getId() + "   ");
+        lblPreferTime.setText("Prefer time to accept delivery\\n" + MyOrder.orderDetail.getOrderTime());
         lstAmendOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         amendOrderDetailAdapter = new UserOrderDetailAdapter(MyOrder.orderDetail.getItems());
         lstAmendOrderDetails.setAdapter(amendOrderDetailAdapter);
     }
 
+    /**
+     * @param flow
+     * @return
+     */
     private LinearLayoutManager setLayout(int flow) {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(flow);
@@ -76,6 +83,9 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
         }
     }
 
+    /**
+     * @param orderId
+     */
     private void init(String orderId) {
         if (isConnected()) {
             show();

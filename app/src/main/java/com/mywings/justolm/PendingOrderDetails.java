@@ -22,6 +22,7 @@ public class PendingOrderDetails extends JustOlmCompactActivity implements OnDel
     private RecyclerView lstPedingOrderDetails;
     private AppCompatTextView lblOrderDate;
     private AppCompatTextView lblOrderNo;
+    private AppCompatTextView lblPreferTime;
     //endregion
 
     @Override
@@ -35,12 +36,14 @@ public class PendingOrderDetails extends JustOlmCompactActivity implements OnDel
         lstPedingOrderDetails = (RecyclerView) findViewById(R.id.lstPendingOrdersItems);
         lblOrderDate = (AppCompatTextView) findViewById(R.id.lblOrderDate);
         lblOrderNo = (AppCompatTextView) findViewById(R.id.lblOrderNo);
+        lblPreferTime = (AppCompatTextView) findViewById(R.id.lblPreferTime);
         lstPedingOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         final PendingOrderView pendingOrderView = new PendingOrderView(order.getItems());
         lstPedingOrderDetails.setAdapter(pendingOrderView);
 
-        lblOrderNo.setText("   Order No \n" + order.getId());
-        lblOrderDate.setText("   Order Date \n" + order.getCreatedAt());
+        lblOrderNo.setText("   Order No \n" + order.getId() + "    ");
+        lblOrderDate.setText("   Order Date \n" + order.getCreatedAt().split(" ")[0]);
+        lblPreferTime.setText("Prefer time to accept delivery\\n" + order.getOrderTime());
     }
 
     private LinearLayoutManager setLayout(int flow) {

@@ -49,12 +49,24 @@
     </LinearLayout>
 
 
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/lblPreferTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lnrTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:text="Prefer time to accept delivery\n04:50 PM"
+        android:textColor="@color/colorPrimaryTitle"
+        android:textStyle="bold" />
+
     <RelativeLayout
         android:id="@+id/lnrHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_below="@+id/lnrTitle"
+        android:layout_below="@+id/lblPreferTime"
         android:layout_marginTop="5dp"
         android:background="@color/colorAccent"
         android:paddingBottom="2dp"
