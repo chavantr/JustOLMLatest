@@ -47,7 +47,7 @@ public class AmendScheduleDetails extends JustOlmCompactActivity implements OnIn
         lstAmendOrderDetails = (RecyclerView) findViewById(R.id.lstAmendOrderDetails);
         btnUpdateOrder = (AppCompatButton) findViewById(R.id.btnUpdateOrder);
         lblOrderDate.setText("  Order Date\n" + AmendScheduler.orderDetail.getCreatedAt().split(" ")[0]);
-        lblOrderNumber.setText("Order No \n" + AmendScheduler.orderDetail.getId() + "   ");
+        lblOrderNumber.setText("Order No \n" + AmendScheduler.orderDetail.getId() + "  ");
         lblPreferTime.setText("Prefer time to accept delivery\n" + AmendScheduler.orderDetail.getOrderTime());
 
         lstAmendOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
@@ -135,9 +135,14 @@ public class AmendScheduleDetails extends JustOlmCompactActivity implements OnIn
      */
     private void initOrder(InitOrderRequest request) {
         if (isConnected()) {
-            show();
-            InitOrder initOrder = initHelper.initOrder(serviceFunctions);
-            initOrder.setOnInitOrderListener(this, request);
+            if (request.getItems().size() <= 0) {
+                Dialog dialog = confirmation();
+                dialog.show();
+            } else {
+                show();
+                InitOrder initOrder = initHelper.initOrder(serviceFunctions);
+                initOrder.setOnInitOrderListener(this, request);
+            }
         }
     }
 

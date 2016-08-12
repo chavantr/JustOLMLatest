@@ -45,7 +45,7 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
         lstAmendOrderDetails = (RecyclerView) findViewById(R.id.lstAmendOrderDetails);
         btnUpdate = (AppCompatButton) findViewById(R.id.btnUpdateOrder);
         lblOrderDate.setText("  Order Date\n" + AmendOrder.orderDetail.getCreatedAt().split(" ")[0]);
-        lblOrderNumber.setText("Order No \n" + AmendOrder.orderDetail.getId() + "     ");
+        lblOrderNumber.setText("Order No \n" + AmendOrder.orderDetail.getId() + "  ");
         lblPreferTime.setText("Prefer time to accept delivery\n" + AmendOrder.orderDetail.getOrderTime());
         lstAmendOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         amendOrderDetailAdapter = new AmendOrderDetailAdapter(AmendOrder.orderDetail.getItems());
@@ -69,6 +69,9 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 initOrder(generate(amendOrderDetailAdapter.orderDetails));
             }
         });
