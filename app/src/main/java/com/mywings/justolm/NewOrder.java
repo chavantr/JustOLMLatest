@@ -252,7 +252,6 @@ public class NewOrder extends JustOlmCompactActivity
             public void onClick(View v) {
                 lnrItems.removeView(ui.get(v.getTag()));
 
-                lnrItems.invalidate();
                 indexCount = indexCount - 1;
                 if (lnrItems.getChildCount() == 0) {
                     index = -1;
@@ -260,6 +259,8 @@ public class NewOrder extends JustOlmCompactActivity
                     ui = null;
                     ui = new HashMap<Integer, View>();
                 }
+                updateCount();
+                lnrItems.invalidate();
             }
         });
         updateCount();
