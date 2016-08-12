@@ -46,7 +46,6 @@ public class NewOrder extends JustOlmCompactActivity
 
 
     //region UI Controls
-
     private static int index = -1;
     private static int indexCount = 0;
     private final Calendar calendar = Calendar.getInstance();
@@ -87,6 +86,22 @@ public class NewOrder extends JustOlmCompactActivity
         timeFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
         lblTime.setText(getString(R.string.prefer_time_to_accept_delivery) + "\n" + timeFormat.format(new Date(calendar.getTimeInMillis())));
         strTime = timeFormat.format(new Date(calendar.getTimeInMillis()));
+    }
+
+    /**
+     *
+     */
+    private void updateCount() {
+        if (null != lnrItems) {
+            if (lnrItems.getChildCount() > 1) {
+                for (int i = 0; i < lnrItems.getChildCount(); i++) {
+                    View view = lnrItems.getChildAt(i);
+                    AppCompatTextView lblIndex = (AppCompatTextView) view.findViewById(R.id.lblIndex);
+                    lblIndex.setText(String.valueOf(i + 1));
+                    lnrItems.invalidate();
+                }
+            }
+        }
     }
 
 
@@ -236,6 +251,7 @@ public class NewOrder extends JustOlmCompactActivity
             @Override
             public void onClick(View v) {
                 lnrItems.removeView(ui.get(v.getTag()));
+
                 lnrItems.invalidate();
                 indexCount = indexCount - 1;
                 if (lnrItems.getChildCount() == 0) {
@@ -246,6 +262,7 @@ public class NewOrder extends JustOlmCompactActivity
                 }
             }
         });
+        updateCount();
         return view;
     }
 
