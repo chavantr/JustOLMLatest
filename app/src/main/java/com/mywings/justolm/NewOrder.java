@@ -251,7 +251,6 @@ public class NewOrder extends JustOlmCompactActivity
             @Override
             public void onClick(View v) {
                 lnrItems.removeView(ui.get(v.getTag()));
-
                 indexCount = indexCount - 1;
                 if (lnrItems.getChildCount() == 0) {
                     index = -1;
