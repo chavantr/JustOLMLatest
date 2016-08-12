@@ -36,7 +36,7 @@ public class MyOrderDetails extends JustOlmCompactActivity implements OnDeleteLi
         lstAmendOrderDetails = (RecyclerView) findViewById(R.id.lstAmendOrderDetails);
         lblOrderDate.setText("   Order Date\n" + MyOrder.orderDetail.getCreatedAt().split(" ")[0]);
         lblOrderNumber.setText("  Order No \n" + MyOrder.orderDetail.getId() + "   ");
-        lblPreferTime.setText("Prefer time to accept delivery\\n" + MyOrder.orderDetail.getOrderTime());
+        lblPreferTime.setText("Prefer time to accept delivery\n" + MyOrder.orderDetail.getOrderTime());
         lstAmendOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         amendOrderDetailAdapter = new UserOrderDetailAdapter(MyOrder.orderDetail.getItems());
         lstAmendOrderDetails.setAdapter(amendOrderDetailAdapter);

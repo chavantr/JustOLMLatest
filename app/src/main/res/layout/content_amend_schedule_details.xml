@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="60"
-            android:gravity="center"
+
             android:text="  Order Date \n 01/02/2016"
             android:textColor="@color/colorPrimaryTitle"
             android:textStyle="bold" />
@@ -38,7 +38,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="40"
-            android:gravity="center"
+
             android:text="   Order No \n 0123456897"
             android:textColor="@color/colorPrimaryTitle"
             android:textStyle="bold" />

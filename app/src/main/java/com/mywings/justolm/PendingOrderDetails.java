@@ -43,13 +43,24 @@ public class PendingOrderDetails extends JustOlmCompactActivity implements OnDel
 
         lblOrderNo.setText("   Order No \n" + order.getId() + "    ");
         lblOrderDate.setText("   Order Date \n" + order.getCreatedAt().split(" ")[0]);
-        lblPreferTime.setText("Prefer time to accept delivery\\n" + order.getOrderTime());
+        lblPreferTime.setText("Prefer time to accept delivery\n" + order.getOrderTime());
     }
 
     private LinearLayoutManager setLayout(int flow) {
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         linearLayoutManager.setOrientation(flow);
         return linearLayoutManager;
+    }
+
+    /**
+     * @param orderId
+     */
+    private void init(String orderId) {
+        if (isConnected()) {
+            show();
+            DeleteOrder deleteOrder = initHelper.deleteOrder(serviceFunctions, String.valueOf(justOLMShared.getIntegerValue("userId")), orderId);
+            deleteOrder.setOnDeleteListener(this, this);
+        }
     }
 
     @Override
@@ -83,11 +94,5 @@ public class PendingOrderDetails extends JustOlmCompactActivity implements OnDel
         return super.onOptionsItemSelected(item);
     }
 
-    private void init(String orderId) {
-        if (isConnected()) {
-            show();
-            DeleteOrder deleteOrder = initHelper.deleteOrder(serviceFunctions, String.valueOf(justOLMShared.getIntegerValue("userId")), orderId);
-            deleteOrder.setOnDeleteListener(this, this);
-        }
-    }
+
 }

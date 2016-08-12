@@ -16,15 +16,18 @@ import com.mywings.justolm.Binder.AmendOrderDetailAdapter;
 import com.mywings.justolm.Model.InitOrderRequest;
 import com.mywings.justolm.Model.Items;
 import com.mywings.justolm.Model.UserMessage;
+import com.mywings.justolm.Process.DeleteOrder;
 import com.mywings.justolm.Process.InitOrder;
+import com.mywings.justolm.Process.OnDeleteListener;
 import com.mywings.justolm.Process.OnInitOrderListener;
 
 import java.util.List;
 
-public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitOrderListener {
+public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitOrderListener, OnDeleteListener {
 
     private AppCompatTextView lblOrderDate;
     private AppCompatTextView lblOrderNumber;
+    private AppCompatTextView lblPreferTime;
     private RecyclerView lstAmendOrderDetails;
     private AmendOrderDetailAdapter amendOrderDetailAdapter;
     private AppCompatButton btnUpdate;
@@ -38,10 +41,12 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         lblOrderDate = (AppCompatTextView) findViewById(R.id.lblOrderDate);
         lblOrderNumber = (AppCompatTextView) findViewById(R.id.lblOrderNo);
+        lblPreferTime = (AppCompatTextView) findViewById(R.id.lblPreferTime);
         lstAmendOrderDetails = (RecyclerView) findViewById(R.id.lstAmendOrderDetails);
         btnUpdate = (AppCompatButton) findViewById(R.id.btnUpdateOrder);
-        lblOrderDate.setText("Order Date\n" + AmendOrder.orderDetail.getCreatedAt());
-        lblOrderNumber.setText("Order No \n" + AmendOrder.orderDetail.getId());
+        lblOrderDate.setText("  Order Date\n" + AmendOrder.orderDetail.getCreatedAt().split(" ")[0]);
+        lblOrderNumber.setText("Order No \n" + AmendOrder.orderDetail.getId() + "     ");
+        lblPreferTime.setText("Prefer time to accept delivery\n" + AmendOrder.orderDetail.getOrderTime());
         lstAmendOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         amendOrderDetailAdapter = new AmendOrderDetailAdapter(AmendOrder.orderDetail.getItems());
         amendOrderDetailAdapter.setOnTextChangeListener(new AmendOrderDetailAdapter.OnTextChangeListener() {
@@ -91,6 +96,17 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
         }
     }
 
+    /**
+     * @param orderId
+     */
+    private void init(String orderId) {
+        if (isConnected()) {
+            show();
+            DeleteOrder deleteOrder = initHelper.deleteOrder(serviceFunctions, String.valueOf(justOLMShared.getIntegerValue("userId")), orderId);
+            deleteOrder.setOnDeleteListener(this, this);
+        }
+    }
+
     private InitOrderRequest generate(List<Items> orderDetails) {
         InitOrderRequest request = InitOrderRequest.getInstance();
         request.setOrderDate(AmendOrder.orderDetail.getCreatedAt());
@@ -123,16 +139,27 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
+                init(AmendOrder.orderDetail.getId());
             }
         });
         builder.setNegativeButton(getString(R.string.action_no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                finish();
             }
         });
         builder.setCancelable(false);
         return builder.create();
+    }
+
+    @Override
+    public void onDeleteComplete(UserMessage userMessage, Exception exception) {
+        hide();
+        if (null != userMessage && exception == null) {
+            finish();
+        } else {
+            show(exception.getMessage(), getGroup());
+        }
     }
 }

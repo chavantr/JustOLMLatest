@@ -121,14 +121,16 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int index, long id) {
 
-                selectedPosition = position;
-                UpdateOrderAdmin updateOrderAdmin = new UpdateOrderAdmin();
-                updateOrderAdmin.setUserId(orders.get(position).getUserId());
-                updateOrderAdmin.setAdminId(String.valueOf(pendingOrder.justOLMShared.getIntegerValue("userId")));
-                updateOrderAdmin.setOrderId(orders.get(position).getId());
-                updateOrderAdmin.setStatusId(orders.get(position).getOrderStatusId());
-                if (pendingOrder.isConnected()) {
-                    initUpdateOrder(updateOrderAdmin);
+                if (index != 0) {
+                    selectedPosition = position;
+                    UpdateOrderAdmin updateOrderAdmin = new UpdateOrderAdmin();
+                    updateOrderAdmin.setUserId(orders.get(position).getUserId());
+                    updateOrderAdmin.setAdminId(String.valueOf(pendingOrder.justOLMShared.getIntegerValue("userId")));
+                    updateOrderAdmin.setOrderId(orders.get(position).getId());
+                    updateOrderAdmin.setStatusId(orders.get(position).getOrderStatusId());
+                    if (pendingOrder.isConnected()) {
+                        initUpdateOrder(updateOrderAdmin);
+                    }
                 }
             }
 
@@ -177,13 +179,14 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
      * @return
      */
     private int getSelectedPosition(String id) {
-
-        if (id.equalsIgnoreCase("2")) {
+        if (id.equalsIgnoreCase("1")) {
             return 0;
-        } else if (id.equalsIgnoreCase("3")) {
+        } else if (id.equalsIgnoreCase("2")) {
             return 1;
-        } else {
+        } else if (id.equalsIgnoreCase("3")) {
             return 2;
+        } else {
+            return 3;
         }
     }
 

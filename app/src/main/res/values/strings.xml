@@ -79,6 +79,14 @@
     </array>
 
 
+    <array name="statusadmin">
+        <item>Pending</item>
+        <item>Accept</item>
+        <item>Reject</item>
+        <item>Delivered</item>
+    </array>
+
+
     <string name="title_activity_just_olmscreen">Home</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

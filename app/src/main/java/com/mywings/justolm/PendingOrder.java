@@ -133,9 +133,7 @@ public class PendingOrder extends JustOlmCompactActivity
     }
 
     private void startpendingorderdetails(int id, List<Order> orders) {
-
         orderDetail = orders.get(id);
-
         Intent intent = new Intent(PendingOrder.this, PendingOrderDetails.class);
         intent.putExtra("isdelete", orders.get(id).getOrderStatusName());
         startActivity(intent);
