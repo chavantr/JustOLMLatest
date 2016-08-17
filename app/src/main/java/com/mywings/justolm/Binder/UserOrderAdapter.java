@@ -66,6 +66,17 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
         holder.lblOrderDate.setText("Order Date : " + orders.get(position).getCreatedAt());
         holder.lblOrderStatus.setText(orders.get(position).getOrderStatusName());
 
+        if (orders.get(position).getOrderStatusId().equalsIgnoreCase("1")) {
+            holder.lblOrderStatus.setTextColor(context.getResources().getColor(R.color.pending_orange_1));
+        } else if (orders.get(position).getOrderStatusId().equalsIgnoreCase("2")) {
+            holder.lblOrderStatus.setTextColor(context.getResources().getColor(R.color.accepted_green_2));
+        } else if (orders.get(position).getOrderStatusId().equalsIgnoreCase("3")) {
+            holder.lblOrderStatus.setTextColor(context.getResources().getColor(R.color.rejected_red_3));
+        } else if (orders.get(position).getOrderStatusId().equalsIgnoreCase("4")) {
+            holder.lblOrderStatus.setTextColor(context.getResources().getColor(R.color.delivered_majenta_4));
+        }
+
+
         if (orders.get(position).getTypeId().equalsIgnoreCase("1")) {
             holder.lblOrderType.setText("Order Type : " + "Prescribed");
         } else {
@@ -94,7 +105,7 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
             }
         });
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickPosition = position;
@@ -195,8 +206,8 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
         AppCompatTextView lblOrderType;
         AppCompatTextView lblOrderStatus;
         LinearLayout lnrStatus;
-
         Button btnDelete;
+        Button btnView;
         AppCompatImageView imgDeleteIcon;
         CardView panel;
 
@@ -208,6 +219,7 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
             lblOrderStatus = (AppCompatTextView) itemView.findViewById(R.id.lblOrderStatus);
             lnrStatus = (LinearLayout) itemView.findViewById(R.id.lnrStatus);
             btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
+            btnView = (Button) itemView.findViewById(R.id.btnView);
             imgDeleteIcon = (AppCompatImageView) itemView.findViewById(R.id.imgDeleteIcon);
             panel = (CardView) itemView.findViewById(R.id.panel);
         }

@@ -17,7 +17,6 @@ import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Model.UpdateOrderAdmin;
 import com.mywings.justolm.Model.UserMessage;
 import com.mywings.justolm.MyOrder;
-import com.mywings.justolm.PendingOrder;
 import com.mywings.justolm.Process.DeleteOrder;
 import com.mywings.justolm.Process.OnDeleteListener;
 import com.mywings.justolm.Process.OnUpdateOrderListener;
@@ -70,9 +69,6 @@ public class MyOrdersAdminAdapter extends RecyclerView.Adapter<MyOrdersAdminAdap
 
         holder.spnStatus.setSelection(getSelectedPosition(orders.get(position).getOrderStatusId()), false);
 
-
-        //holder.spnStatus.getAdapter().getItem(0).;
-
         if (orders.get(position).getTypeId().equalsIgnoreCase("1")) {
             holder.lblOrderType.setText("Order Type : " + "Prescribed");
         } else {
@@ -124,8 +120,6 @@ public class MyOrdersAdminAdapter extends RecyclerView.Adapter<MyOrdersAdminAdap
         holder.spnStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int index, long id) {
-
-
                 selectedPosition = position;
                 UpdateOrderAdmin updateOrderAdmin = new UpdateOrderAdmin();
                 updateOrderAdmin.setUserId(orders.get(position).getUserId());
@@ -177,6 +171,20 @@ public class MyOrdersAdminAdapter extends RecyclerView.Adapter<MyOrdersAdminAdap
         notifyDataSetChanged();
     }
 
+    /**
+     * @param id
+     * @return
+     */
+    private int getSelectedPosition(String id) {
+
+        if (id.equalsIgnoreCase("2")) {
+            return 0;
+        } else if (id.equalsIgnoreCase("3")) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
 
     public interface OnItemClickListener {
         void onItemClick(int id);
@@ -202,21 +210,6 @@ public class MyOrdersAdminAdapter extends RecyclerView.Adapter<MyOrdersAdminAdap
             btnDelete = (Button) itemView.findViewById(R.id.btnDelete);
             imgDeleteIcon = (AppCompatImageView) itemView.findViewById(R.id.imgDeleteIcon);
             panel = (CardView) itemView.findViewById(R.id.panel);
-        }
-    }
-
-    /**
-     * @param id
-     * @return
-     */
-    private int getSelectedPosition(String id) {
-
-        if (id.equalsIgnoreCase("2")) {
-            return 0;
-        } else if (id.equalsIgnoreCase("3")) {
-            return 1;
-        } else {
-            return 2;
         }
     }
 

@@ -1,6 +1,9 @@
 package com.mywings.justolm.Binder;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
@@ -31,7 +34,6 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
     private PendingOrder pendingOrder;
     private int clickPosition;
     private Context context;
-
     private OnItemClickListener onItemClickListener;
     //endregion
 
@@ -59,6 +61,10 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
 
         holder.lblOrderNo.setText("Order No : " + orders.get(position).getId());
         holder.lblOrderDate.setText("Order Date : " + orders.get(position).getCreatedAt());
+
+        holder.lblOrderStatus.setTextColor(context.getResources().getColor(R.color.pending_orange_1));
+
+
         holder.lblOrderStatus.setText(orders.get(position).getOrderStatusName());
 
         if (orders.get(position).getTypeId().equalsIgnoreCase("1")) {
@@ -95,11 +101,12 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
             }
         });
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickPosition = position;
-                init(orders.get(position).getId());
+                Dialog dialog = confirmation(position);
+                dialog.show();
             }
         });
         holder.panel.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +129,30 @@ public class PendingOrdersSpinnerAdapter extends RecyclerView.Adapter<PendingOrd
         pendingOrder.hide();
         orders.remove(clickPosition);
         notifyDataSetChanged();
+    }
+
+    /**
+     *
+     */
+    public Dialog confirmation(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(context.getString(R.string.app_name));
+        builder.setMessage(context.getString(R.string.delete_confirmation));
+        builder.setPositiveButton(context.getString(R.string.action_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                init(orders.get(position).getId());
+            }
+        });
+        builder.setNegativeButton(context.getString(R.string.action_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        return builder.create();
     }
 
     private void init(String orderId) {

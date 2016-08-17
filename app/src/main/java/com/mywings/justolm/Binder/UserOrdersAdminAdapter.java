@@ -12,12 +12,12 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mywings.justolm.Model.Order;
 import com.mywings.justolm.Model.UpdateOrderAdmin;
 import com.mywings.justolm.Model.UserMessage;
 import com.mywings.justolm.MyOrder;
-import com.mywings.justolm.PendingOrder;
 import com.mywings.justolm.Process.DeleteOrder;
 import com.mywings.justolm.Process.OnDeleteListener;
 import com.mywings.justolm.Process.OnUpdateOrderListener;
@@ -31,14 +31,12 @@ import java.util.List;
  */
 public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdminAdapter.ViewHolder> implements OnDeleteListener, OnUpdateOrderListener {
 
-
     //region Variables
     public List<Order> orders;
     private MyOrder pendingOrder;
     private int clickPosition;
     private int selectedPosition;
     private Context context;
-
     private OnItemClickListener onItemClickListener;
     //endregion
 
@@ -66,9 +64,20 @@ public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdmin
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
         holder.lblOrderNo.setText("Order No : " + orders.get(position).getId());
+
         holder.lblOrderDate.setText("Order Date : " + orders.get(position).getCreatedAt());
 
-        holder.spnStatus.setSelection(getSelectedPosition(orders.get(position).getOrderStatusId()), false);
+        holder.spnStatus.setSelection(0/*getSelectedPosition(orders.get(position).getOrderStatusId())*/, false);
+
+        if (orders.get(position).getOrderStatusId().equalsIgnoreCase("1")) {
+            ((TextView) holder.spnStatus.getSelectedView()).setTextColor(context.getResources().getColor(R.color.pending_orange_1));
+        } else if (orders.get(position).getOrderStatusId().equalsIgnoreCase("2")) {
+            ((TextView) holder.spnStatus.getSelectedView()).setTextColor(context.getResources().getColor(R.color.accepted_green_2));
+        } else if (orders.get(position).getOrderStatusId().equalsIgnoreCase("3")) {
+            ((TextView) holder.spnStatus.getSelectedView()).setTextColor(context.getResources().getColor(R.color.rejected_red_3));
+        } else if (orders.get(position).getOrderStatusId().equalsIgnoreCase("4")) {
+            ((TextView) holder.spnStatus.getSelectedView()).setTextColor(context.getResources().getColor(R.color.delivered_majenta_4));
+        }
 
         if (orders.get(position).getTypeId().equalsIgnoreCase("1")) {
             holder.lblOrderType.setText("Order Type : " + "Prescribed");
@@ -109,6 +118,7 @@ public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdmin
                 init(orders.get(position).getId());
             }
         });
+
         holder.panel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -123,21 +133,26 @@ public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdmin
             public void onItemSelected(AdapterView<?> parent, View view, int index, long id) {
 
                 selectedPosition = position;
+
                 UpdateOrderAdmin updateOrderAdmin = new UpdateOrderAdmin();
                 updateOrderAdmin.setUserId(orders.get(position).getUserId());
                 updateOrderAdmin.setAdminId(String.valueOf(pendingOrder.justOLMShared.getIntegerValue("userId")));
                 updateOrderAdmin.setOrderId(orders.get(position).getId());
                 updateOrderAdmin.setStatusId(orders.get(position).getOrderStatusId());
+
                 if (pendingOrder.isConnected()) {
                     initUpdateOrder(updateOrderAdmin);
                 }
+
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+
         });
+
     }
 
     @Override
@@ -153,14 +168,12 @@ public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdmin
     }
 
     private void init(String orderId) {
-
         pendingOrder.show();
         DeleteOrder deleteOrder = pendingOrder.initHelper.deleteOrder(pendingOrder.serviceFunctions, String.valueOf(pendingOrder.justOLMShared.getIntegerValue("userId")), orderId);
         deleteOrder.setOnDeleteListener(this, context);
     }
 
     private void initUpdateOrder(UpdateOrderAdmin updateOrderAdmin) {
-
         pendingOrder.show();
         UpdateOrder updateOrder = pendingOrder.initHelper.updateOrder(pendingOrder.serviceFunctions, updateOrderAdmin);
         updateOrder.setOnUpdateOrderListener(this, context);
@@ -178,21 +191,25 @@ public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdmin
      * @return
      */
     private int getSelectedPosition(String id) {
-
-        if (id.equalsIgnoreCase("2")) {
+        if (id.equalsIgnoreCase("1")) {
             return 0;
-        } else if (id.equalsIgnoreCase("3")) {
+        } else if (id.equalsIgnoreCase("2")) {
             return 1;
-        } else {
+        } else if (id.equalsIgnoreCase("3")) {
             return 2;
+        } else if (id.equalsIgnoreCase("4")) {
+            return 3;
         }
+        return 0;
     }
+
 
     public interface OnItemClickListener {
         void onItemClick(int id);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         AppCompatTextView lblOrderNo;
         AppCompatTextView lblOrderDate;
         AppCompatTextView lblOrderType;
@@ -214,6 +231,4 @@ public class UserOrdersAdminAdapter extends RecyclerView.Adapter<UserOrdersAdmin
             panel = (CardView) itemView.findViewById(R.id.panel);
         }
     }
-
-
 }

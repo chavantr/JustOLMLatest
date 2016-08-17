@@ -30,14 +30,14 @@
                 android:text="@string/edit"
                 android:textAllCaps="false"
                 android:textSize="17sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="gone" />
 
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_amend_order" />
-
 
 
 </android.support.design.widget.CoordinatorLayout>

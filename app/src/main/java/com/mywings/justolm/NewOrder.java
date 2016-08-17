@@ -5,7 +5,13 @@ import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.provider.MediaStore;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +28,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TimePicker;
@@ -32,6 +39,7 @@ import com.mywings.justolm.Model.UserMessage;
 import com.mywings.justolm.Process.InitOrder;
 import com.mywings.justolm.Process.OnInitOrderListener;
 
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +53,8 @@ public class NewOrder extends JustOlmCompactActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnInitOrderListener {
 
 
+    private static final int CAMETA = 101;
+    private static final int GALLERY = 102;
     //region UI Controls
     private static int index = -1;
     private static int indexCount = 0;
@@ -68,6 +78,8 @@ public class NewOrder extends JustOlmCompactActivity
     private DateFormat timeFormat;
     private String strDate;
     private String strTime;
+    private int selectedPrescribled;
+
 
     //endregion
 
@@ -93,7 +105,7 @@ public class NewOrder extends JustOlmCompactActivity
      */
     private void updateCount() {
         if (null != lnrItems) {
-            if (lnrItems.getChildCount() > 1) {
+            if (lnrItems.getChildCount() >= 1) {
                 for (int i = 0; i < lnrItems.getChildCount(); i++) {
                     View view = lnrItems.getChildAt(i);
                     AppCompatTextView lblIndex = (AppCompatTextView) view.findViewById(R.id.lblIndex);
@@ -110,7 +122,9 @@ public class NewOrder extends JustOlmCompactActivity
             if (lnrItems.getChildCount() > 1) {
                 for (int i = 0; i < lnrItems.getChildCount() - 1; i++) {
                     View view = lnrItems.getChildAt(i);
+
                     AppCompatEditText txtName = (AppCompatEditText) view.findViewById(R.id.txtName);
+
                     if (((AppCompatEditText) lnrItems.getChildAt(lnrItems.getChildCount() - 1).findViewById(R.id.txtName)).getText().toString().equalsIgnoreCase(txtName.getText().toString().trim())) {
                         return false;
                     }
@@ -132,10 +146,22 @@ public class NewOrder extends JustOlmCompactActivity
                 if (index > -1) {
                     View validateView = ui.get(index);
                     if (null != validateView) {
-                        AppCompatEditText txtName = (AppCompatEditText) validateView.findViewById(R.id.txtName);
+                        AppCompatEditText txtName = null;
+                        AppCompatTextView btnImage = null;
+                        if (prescribed.isChecked()) {
+                            btnImage = (AppCompatTextView) validateView.findViewById(R.id.btnImage);
+                        } else {
+                            txtName = (AppCompatEditText) validateView.findViewById(R.id.txtName);
+                        }
                         AppCompatEditText txtQty = (AppCompatEditText) validateView.findViewById(R.id.txtQty);
-                        if (txtName.getText().toString().isEmpty()) {
-                            show("Please enter item description.", v);
+                        if (!prescribed.isChecked()) {
+                            if (txtName.getText().toString().isEmpty()) {
+                                show("Please enter item description.", v);
+                            }
+                        } else if (prescribed.isChecked()) {
+                            if (!btnImage.getText().toString().isEmpty()) {
+                                show("Please select item prescription.", v);
+                            }
                         } else if (txtQty.getText().toString().isEmpty()) {
                             show("Please enter qty for item.", v);
                         } else if (!txtQty.getText().toString().isEmpty() && Integer.parseInt(txtQty.getText().toString().trim()) > 16) {
@@ -196,6 +222,20 @@ public class NewOrder extends JustOlmCompactActivity
             }
         });
 
+
+        prescribed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != lnrItems) {
+                    if (lnrItems.getChildCount() > 0) {
+                        Dialog dialog = prescribedChange(prescribed.isChecked());
+                        dialog.show();
+                    }
+                }
+            }
+        });
+
+
     }
 
     private void showTimePicker() {
@@ -238,9 +278,140 @@ public class NewOrder extends JustOlmCompactActivity
     }
 
 
+    private Intent getImagePickerIntent() {
+        Intent chooserIntent = null;
+
+        List<Intent> intentList = new ArrayList<>();
+
+        Intent pickIntent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        Intent takePhotoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        //takePhotoIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(getTempFile))
+
+
+        intentList = addIntenttoList(intentList, pickIntent);
+
+        intentList = addIntenttoList(intentList, takePhotoIntent);
+
+        if (intentList.size() > 0) {
+
+            chooserIntent = Intent.createChooser(intentList.remove(intentList.size() - 1), "Select");
+
+
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentList.toArray(new Parcelable[]{}));
+
+        }
+
+        return chooserIntent;
+    }
+
+
+    private List<Intent> addIntenttoList(List<Intent> list, Intent intent) {
+
+        List<ResolveInfo> resolveInfos = getPackageManager().queryIntentActivities(intent, 0);
+
+        for (ResolveInfo resolveInfo : resolveInfos) {
+
+            String packageName = resolveInfo.activityInfo.packageName;
+
+            Intent targetIntent = new Intent(intent);
+            targetIntent.setPackage(packageName);
+
+            list.add(targetIntent);
+        }
+        return list;
+    }
+
+
+    private void startCamera() {
+        Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+
+//        takePicture.putExtra(MediaStore.EXTRA_OUTPUT,getImageUrl());
+
+        startActivityForResult(takePicture, CAMETA);
+    }
+
+
+    private Uri getImageUrl() {
+        Uri imgUrl = null;
+
+        //File file = new File("file:///sdcard/image.jpg");
+
+        imgUrl = Uri.parse("file:///sdcard/image.jpg");
+
+        return imgUrl;
+
+    }
+
+    private void startGallery() {
+        Intent takePicture = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(takePicture, GALLERY);
+    }
+
+    /**
+     *
+     */
+    private Dialog image() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Select");
+        LayoutInflater inflater = getLayoutInflater();
+        View popup = inflater.inflate(R.layout.pick_camera, null);
+        Button btnCamera = (Button) popup.findViewById(R.id.btnCamera);
+        Button btnGallery = (Button) popup.findViewById(R.id.btnGallery);
+        Button btnCancel = (Button) popup.findViewById(R.id.btnCancel);
+
+        btnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                startCamera();
+            }
+        });
+
+        btnGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                startGallery();
+            }
+        });
+
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        builder.setView(popup);
+        builder.setCancelable(false);
+        return builder.create();
+    }
+
+
     private View generate() {
         View view = null;
-        view = LayoutInflater.from(this).inflate(R.layout.newitem, null);
+        if (prescribed.isChecked()) {
+            view = LayoutInflater.from(this).inflate(R.layout.newitem_prescribe, null);
+
+            final View finalView = view;
+            ((AppCompatTextView) view.findViewById(R.id.btnImage)).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    selectedPrescribled = (int) finalView.getTag();
+
+                    dialog = image();
+                    dialog.show();
+
+
+                }
+            });
+
+        } else {
+            view = LayoutInflater.from(this).inflate(R.layout.newitem, null);
+        }
         index = index + 1;
         view.setTag(index);
         imgErase = (AppCompatImageView) view.findViewById(R.id.imgErase);
@@ -251,13 +422,18 @@ public class NewOrder extends JustOlmCompactActivity
             @Override
             public void onClick(View v) {
                 lnrItems.removeView(ui.get(v.getTag()));
+
                 indexCount = indexCount - 1;
+
+                index = index - 1;
+
                 if (lnrItems.getChildCount() == 0) {
                     index = -1;
                     indexCount = 0;
                     ui = null;
                     ui = new HashMap<Integer, View>();
                 }
+
                 updateCount();
                 lnrItems.invalidate();
             }
@@ -326,6 +502,7 @@ public class NewOrder extends JustOlmCompactActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     private void startpendingscreen() {
         Intent intent = new Intent(NewOrder.this, PendingOrder.class);
@@ -401,8 +578,6 @@ public class NewOrder extends JustOlmCompactActivity
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                //btnAddPrescription.setEnabled(false);
-                //lnrItems.setEnabled(false);
                 initOrder(generate(ui));
             }
         });
@@ -415,6 +590,40 @@ public class NewOrder extends JustOlmCompactActivity
         builder.setCancelable(false);
         return builder.create();
     }
+
+
+    /**
+     *
+     */
+    public Dialog prescribedChange(final boolean is) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.app_name));
+        builder.setMessage(getString(R.string.prescribeditemchange));
+        builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                index = -1;
+                indexCount = 0;
+                ui = null;
+                ui = new HashMap<Integer, View>();
+                lnrItems.removeAllViews();
+                lnrItems.invalidate();
+
+            }
+        });
+        builder.setNegativeButton(getString(R.string.action_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                prescribed.setChecked(!is);
+            }
+        });
+        builder.setCancelable(false);
+        return builder.create();
+    }
+
 
     private InitOrderRequest generate(Map<Integer, View> ui) {
         InitOrderRequest request = InitOrderRequest.getInstance();
@@ -450,7 +659,6 @@ public class NewOrder extends JustOlmCompactActivity
      */
     public Dialog cancelOrder() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
         builder.setTitle("Cancel Order");
         builder.setMessage("Do you really want to cancel your order?");
         builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
@@ -493,6 +701,58 @@ public class NewOrder extends JustOlmCompactActivity
     public void onInitOrderComplete(UserMessage result, Exception exception) {
         hide();
         show(result.getMessage(), btnAddPrescription);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+
+            if (requestCode == GALLERY) {
+
+                Uri uri = data.getData();
+
+                try {
+                    Bitmap image = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                    AppCompatTextView lblImage = (AppCompatTextView) lnrItems.getChildAt(0).findViewById(R.id.btnImage);
+                    lblImage.setBackground(new BitmapDrawable(getResources(), image));
+                    lblImage.setText("");
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else if (requestCode == CAMETA) {
+
+                // Uri uri = (Uri) data.getExtras().get("data");
+
+                // Uri uri = data.getData();
+
+                Bitmap image = (Bitmap) data.getExtras().get("data");
+
+                //   URI uri = URI.create(data.getExtras().get("data").toString());
+
+                //    Bitmap image = null;
+                /*try {*/
+                  /*  image = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);*/
+
+                AppCompatTextView lblImage = (AppCompatTextView) lnrItems.getChildAt(0).findViewById(R.id.btnImage);
+
+                lblImage.setBackground(new BitmapDrawable(getResources(), image));
+
+
+                lblImage.setText("");
+
+                /*} catch (IOException e) {
+                    e.printStackTrace();
+                }*/
+
+                //Bitmap image = (Bitmap) data.getExtras().get("data");
+
+
+            }
+        }
+
     }
 
     public class TimePickerFragment extends DialogFragment
@@ -540,4 +800,6 @@ public class NewOrder extends JustOlmCompactActivity
         }
 
     }
+
+
 }

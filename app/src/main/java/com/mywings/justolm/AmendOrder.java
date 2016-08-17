@@ -238,7 +238,7 @@ public class AmendOrder extends JustOlmCompactActivity
         hide();
         if (null != result && exception == null) {
             Collections.sort(result, new IdComparator());
-            pendingOrdersAdapter = new PendingOrdersAdapter(result);
+            pendingOrdersAdapter = new PendingOrdersAdapter(AmendOrder.this, result);
             pendingOrdersAdapter.setOnViewItemClickListener(new PendingOrdersAdapter.OnViewItemClickListener() {
                 @Override
                 public void onVIewItemClickListener(int position) {

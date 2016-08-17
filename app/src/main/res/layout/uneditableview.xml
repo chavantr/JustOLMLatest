@@ -81,7 +81,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="9dp"
                     android:gravity="center"
-                    android:maxLength="2"
                     android:singleLine="true"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />

@@ -3,7 +3,6 @@ package com.mywings.justolm.Utilities;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -26,7 +25,13 @@ public class DateUtils {
 
     public static String parse(String date) {
         String[] parts = date.split("/");
-        Date parse = new Date(parts[1] + "/" + parts[0] + "/" + parts[2]);
+        Date parse = new Date(parts[0] + "/" + parts[1] + "/" + parts[2]);
         return DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault()).format(parse);
+    }
+
+    public static String shuffle(String format) {
+        String[] parts = format.split("-");
+        String parse = parts[0] + " " + parts[1] + ", " + parts[2];
+        return parse;
     }
 }

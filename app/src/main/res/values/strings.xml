@@ -150,5 +150,7 @@
     <string name="order">Order</string>
     <string name="confirmation_">You don\'t have items under this order so your order will be deleted automatically, Do you really want to delete this order?</string>
     <string name="quantity">Quantity :</string>
+    <string name="delete_confirmation">Do you really want to delete this order?</string>
+    <string name="prescribeditemchange">By selecting this option your existing items list will be cleared, Do you want to proceed?</string>
 
 </resources>

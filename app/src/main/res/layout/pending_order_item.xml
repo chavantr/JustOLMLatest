@@ -39,31 +39,59 @@
                 android:text="Order No :"
                 android:textStyle="bold" />
 
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/lblOrderType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lblOrderNo"
+                android:text="Order Type :" />
+
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/lblOrderDate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lblOrderNo"
+                android:layout_below="@+id/lblOrderType"
                 android:text="Order Date :" />
 
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/lblOrderType"
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:id="@+id/lnrStatus"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lblOrderDate"
-                android:text="Order Type :" />
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="23dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingRight="7dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Status" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/lblOrderStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@string/lbl_pending_status">
+
+                </android.support.v7.widget.AppCompatTextView>
+
+            </LinearLayout>
 
 
             <Button
                 android:id="@+id/btnView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginLeft="7dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/forward"
+                android:layout_marginLeft="7dp"
+                android:background="@drawable/ic_delete_icon_ic"
                 android:textAllCaps="false" />
 
             <Button

@@ -46,7 +46,7 @@ public class PendingOrderView extends RecyclerView.Adapter<PendingOrderView.View
 
         holder.lblPreName.setText(items.get(position).getItemName());
 
-        holder.lblQty.setText(items.get(position).getQuantity());
+        holder.lblQty.setText("Quantity : " + items.get(position).getQuantity());
 
     }
 

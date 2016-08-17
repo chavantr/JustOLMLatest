@@ -59,11 +59,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 android:layout_marginRight="23dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="3dp">
+                android:paddingRight="7dp">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -96,12 +95,12 @@
 
             <Button
                 android:id="@+id/btnView"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="7dp"
-                android:background="@drawable/forward"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/ic_delete_icon_ic"
                 android:textAllCaps="false" />
 
         </RelativeLayout>

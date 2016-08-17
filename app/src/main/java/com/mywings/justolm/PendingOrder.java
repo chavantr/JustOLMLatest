@@ -23,15 +23,14 @@ import com.mywings.justolm.Process.GetOrders;
 import com.mywings.justolm.Process.OnOrderListener;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class PendingOrder extends JustOlmCompactActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnOrderListener {
 
+    public static Order orderDetail;
     //region UI Controls
     private DrawerLayout drawer;
-    public static Order orderDetail;
     private Dialog dialog;
     private RecyclerView lstPendingOrders;
     private PendingOrdersSpinnerAdapter pendingOrdersAdapter;

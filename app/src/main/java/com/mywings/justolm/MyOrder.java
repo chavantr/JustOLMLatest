@@ -155,6 +155,12 @@ public class MyOrder extends JustOlmCompactActivity
                 finish();
                 break;
 
+            case R.id.pendingorder:
+
+                startpendingscreen();
+
+                break;
+
             case R.id.neworder:
                 neworder();
                 finish();

@@ -225,11 +225,11 @@ public class AmendScheduler extends JustOlmCompactActivity
     }
 
     @Override
-    public void onOrderComplete(List<Order> result,boolean isadmin, Exception exception) {
+    public void onOrderComplete(List<Order> result, boolean isadmin, Exception exception) {
         hide();
         if (null != result && exception == null) {
             Collections.sort(result, new IdComparator());
-            pendingOrdersAdapter = new PendingOrdersAdapter(result);
+            pendingOrdersAdapter = new PendingOrdersAdapter(AmendScheduler.this, result);
             pendingOrdersAdapter.setOnViewItemClickListener(new PendingOrdersAdapter.OnViewItemClickListener() {
                 @Override
                 public void onVIewItemClickListener(int position) {

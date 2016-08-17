@@ -217,5 +217,4 @@ public class PendingOrdersAdminAdapter extends RecyclerView.Adapter<PendingOrder
         }
     }
 
-
 }

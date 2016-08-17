@@ -9,4 +9,14 @@
 
     <color name="black_overlay">#66000000</color>
 
+
+    <color name="pending_orange_1">#FFA500</color>
+
+    <color name="accepted_green_2">#2E8B57</color>
+
+    <color name="rejected_red_3">#FF0000</color>
+
+    <color name="delivered_majenta_4">#FF00FF</color>
+
+
 </resources>

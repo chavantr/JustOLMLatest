@@ -69,9 +69,6 @@ public class AmendOrderDetails extends JustOlmCompactActivity implements OnInitO
         btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 initOrder(generate(amendOrderDetailAdapter.orderDetails));
             }
         });

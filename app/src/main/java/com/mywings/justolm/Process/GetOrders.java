@@ -80,7 +80,7 @@ public class GetOrders extends AsyncTask<Context, Void, List<Order>> {
                     Order order = new Order();
                     order.setActionDelete(false);
                     order.setConfirmDeleted(false);
-                    order.setCreatedAt(DateUtils.parse(jsonArray.getJSONObject(i).getString(Constants.ORDER_DATE).split(" ")[0]) + " " + jsonArray.getJSONObject(i).getString(Constants.ORDER_TIME));
+                    order.setCreatedAt(DateUtils.shuffle(DateUtils.parse(jsonArray.getJSONObject(i).getString("created_at").split(" ")[0])) + " " + jsonArray.getJSONObject(i).getString(Constants.ORDER_TIME));
                     order.setId(jsonArray.getJSONObject(i).getString(Constants.ORDER_ID));
                     order.setTypeId(jsonArray.getJSONObject(i).getString(Constants.ORDER_TYPE));
                     order.setOrderStatusId(jsonArray.getJSONObject(i).getString(Constants.STATUS_ID));

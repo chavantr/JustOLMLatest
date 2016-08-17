@@ -19,125 +19,111 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/lblPrescribeName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:gravity="center_vertical"
-                android:padding="2dp"
-                android:text="QQQQQQQQQQQQQ"
-                android:textColor="@color/colorPrimaryTitle"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/lnrScheduler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/lblPrescribeName"
-                android:orientation="horizontal"
-                android:padding="3dp"
-                android:weightSum="100">
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="49.5"
-                    android:orientation="horizontal"
-                    android:padding="3dp"
-                    android:weightSum="100">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/lblSchedule"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="3dp"
-                        android:layout_weight="50"
-                        android:text="Schedule :"
-                        android:textColor="@color/colorPrimaryTitle"
-                        android:textStyle="bold" />
-
-
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/spnScheduler"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@null"
-                        android:entries="@array/scheduler"
-                        android:textColor="@color/colorPrimaryTitle">
-
-                    </android.support.v7.widget.AppCompatSpinner>
-
-
-                </LinearLayout>
-
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/darker_gray" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="49.5"
-                    android:orientation="horizontal"
-                    android:padding="3dp"
-                    android:weightSum="100">
-
-                    <android.support.v7.widget.AppCompatTextView
-                        android:id="@+id/lblPeriod"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_weight="50"
-                        android:text="Period :"
-                        android:textColor="@color/colorPrimaryTitle"
-                        android:textStyle="bold" />
-
-
-                    <android.support.v7.widget.AppCompatEditText
-                        android:id="@+id/txtPeriod"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="50"
-                        android:background="@null"
-                        android:hint="Period"
-                        android:inputType="number"
-                        android:padding="2dp"
-                        android:textColor="@color/colorPrimaryTitle" />
-                </LinearLayout>
-            </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/lnrQty"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/lnrScheduler"
                 android:orientation="horizontal"
-                android:padding="3dp">
+                android:padding="3dp"
+                android:weightSum="100">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/lblPrescribeName"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="60"
+                    android:padding="2dp"
+                    android:textColor="@color/colorPrimaryTitle"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="3dp"
+                    android:layout_weight="30"
                     android:text="Quantity :"
                     android:textColor="@color/colorPrimaryTitle"
                     android:textStyle="bold" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/txtQty"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="10"
                     android:padding="2dp"
                     android:textColor="@color/colorPrimaryTitle" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/lnrScheduler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lnrQty"
+                android:orientation="horizontal"
+                android:padding="3dp"
+                android:weightSum="100">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/lblSchedule"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dp"
+                    android:layout_weight="30"
+                    android:paddingLeft="3dp"
+                    android:text="Schedule :"
+                    android:textColor="@color/colorPrimaryTitle"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatSpinner
+                    android:id="@+id/spnScheduler"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:background="@null"
+                    android:entries="@array/scheduler"
+                    android:textColor="@color/colorPrimaryTitle">
+
+                </android.support.v7.widget.AppCompatSpinner>
 
 
             </LinearLayout>
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lnrScheduler"
+                android:orientation="horizontal"
+                android:padding="3dp"
+                android:weightSum="100">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/lblPeriod"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="30"
+                    android:text="Period :"
+                    android:textColor="@color/colorPrimaryTitle"
+                    android:textStyle="bold" />
+
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/txtPeriod"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="30"
+                    android:background="@null"
+                    android:hint="Period"
+                    android:inputType="number"
+                    android:padding="2dp"
+                    android:textColor="@color/colorPrimaryTitle" />
+            </LinearLayout>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/imgDeleteIcon"

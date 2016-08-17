@@ -18,11 +18,10 @@ import java.util.List;
 /**
  * Created by Tatyabhau Chavan on 5/26/2016.
  */
-public class AmendOrderDetailAdapter extends RecyclerView.Adapter<AmendOrderDetailAdapter.ViewHolder>  {
+public class AmendOrderDetailAdapter extends RecyclerView.Adapter<AmendOrderDetailAdapter.ViewHolder> {
 
     //region Variable
     public List<Items> orderDetails;
-
     private OnTextChangeListener onTextChangeListener;
     //endregion
 
@@ -32,8 +31,6 @@ public class AmendOrderDetailAdapter extends RecyclerView.Adapter<AmendOrderDeta
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        // amendOrder = (AmendOrder) parent.getContext();
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.amend_order_detail_item, parent, false);
 
@@ -84,9 +81,6 @@ public class AmendOrderDetailAdapter extends RecyclerView.Adapter<AmendOrderDeta
     public int getItemCount() {
         return orderDetails.size();
     }
-
-
-
 
 
     public void setOnTextChangeListener(OnTextChangeListener onTextChangeListener) {

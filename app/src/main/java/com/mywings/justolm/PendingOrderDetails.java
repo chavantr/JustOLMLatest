@@ -40,7 +40,6 @@ public class PendingOrderDetails extends JustOlmCompactActivity implements OnDel
         lstPedingOrderDetails.setLayoutManager(setLayout(LinearLayoutManager.VERTICAL));
         final PendingOrderView pendingOrderView = new PendingOrderView(order.getItems());
         lstPedingOrderDetails.setAdapter(pendingOrderView);
-
         lblOrderNo.setText("   Order No \n" + order.getId() + "    ");
         lblOrderDate.setText("   Order Date \n" + order.getCreatedAt().split(" ")[0]);
         lblPreferTime.setText("Prefer time to accept delivery\n" + order.getOrderTime());

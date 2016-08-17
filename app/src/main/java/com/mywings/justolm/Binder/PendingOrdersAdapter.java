@@ -1,5 +1,9 @@
 package com.mywings.justolm.Binder;
 
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.CardView;
@@ -9,7 +13,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.mywings.justolm.AmendOrder;
+import com.mywings.justolm.AmendScheduler;
 import com.mywings.justolm.Model.Order;
+import com.mywings.justolm.Model.UserMessage;
+import com.mywings.justolm.Process.DeleteOrder;
+import com.mywings.justolm.Process.OnDeleteListener;
 import com.mywings.justolm.R;
 
 import java.util.List;
@@ -17,15 +26,23 @@ import java.util.List;
 /**
  * Created by Tatyabhau Chavan on 5/25/2016.
  */
-public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdapter.ViewHolder> {
+public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdapter.ViewHolder> implements OnDeleteListener {
 
 
-    //region Variables
     public List<Order> orders;
+    //region Variables
+    private Context context;
     private OnViewItemClickListener onViewItemClickListener;
+    private int clickPosition;
+    private AmendOrder amendOrder;
+    private AmendScheduler amendScheduler;
+    private boolean flag;
+
+
     //endregion
 
-    public PendingOrdersAdapter(List<Order> orders) {
+    public PendingOrdersAdapter(Context context, List<Order> orders) {
+        this.context = context;
         this.orders = orders;
     }
 
@@ -76,31 +93,80 @@ public class PendingOrdersAdapter extends RecyclerView.Adapter<PendingOrdersAdap
                 notifyDataSetChanged();
             }
         });
-
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orders.remove(position);
-                notifyDataSetChanged();
+                clickPosition = position;
+                Dialog dialog = confirmation(position);
+                dialog.show();
             }
         });
-
         holder.panel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (null != onViewItemClickListener) {
                     onViewItemClickListener.onVIewItemClickListener(position);
                 }
-
             }
         });
+    }
+
+
+    /**
+     *
+     */
+    public Dialog confirmation(final int position) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle(context.getString(R.string.app_name));
+        builder.setMessage(context.getString(R.string.delete_confirmation));
+        builder.setPositiveButton(context.getString(R.string.action_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                init(orders.get(position).getId());
+            }
+        });
+        builder.setNegativeButton(context.getString(R.string.action_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(false);
+        return builder.create();
+    }
+
+    private void init(String orderId) {
+        if ((AmendOrder) context instanceof AmendOrder) {
+            amendOrder = (AmendOrder) context;
+            amendOrder.show();
+            flag = true;
+            DeleteOrder deleteOrder = amendOrder.initHelper.deleteOrder(amendOrder.serviceFunctions, String.valueOf(amendOrder.justOLMShared.getIntegerValue("userId")), orderId);
+            deleteOrder.setOnDeleteListener(this, context);
+        } else {
+            amendScheduler = (AmendScheduler) context;
+            amendScheduler.show();
+            flag = false;
+            DeleteOrder deleteOrder = amendScheduler.initHelper.deleteOrder(amendScheduler.serviceFunctions, String.valueOf(amendScheduler.justOLMShared.getIntegerValue("userId")), orderId);
+            deleteOrder.setOnDeleteListener(this, context);
+        }
 
     }
 
     @Override
     public int getItemCount() {
         return orders.size();
+    }
+
+    @Override
+    public void onDeleteComplete(UserMessage userMessage, Exception exception) {
+        if (flag) {
+            amendOrder.hide();
+        } else {
+            amendScheduler.hide();
+        }
+        orders.remove(clickPosition);
+        notifyDataSetChanged();
     }
 
     public interface OnViewItemClickListener {
