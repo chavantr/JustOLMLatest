@@ -118,6 +118,9 @@ public class NewOrder extends JustOlmCompactActivity
 
 
     private boolean isNotUnique() {
+
+        if (prescribed.isChecked()) return true;
+
         if (null != lnrItems) {
             if (lnrItems.getChildCount() > 1) {
                 for (int i = 0; i < lnrItems.getChildCount() - 1; i++) {
@@ -154,22 +157,24 @@ public class NewOrder extends JustOlmCompactActivity
                             txtName = (AppCompatEditText) validateView.findViewById(R.id.txtName);
                         }
                         AppCompatEditText txtQty = (AppCompatEditText) validateView.findViewById(R.id.txtQty);
-                        if (!prescribed.isChecked()) {
-                            if (txtName.getText().toString().isEmpty()) {
-                                show("Please enter item description.", v);
-                            }
-                        } else if (prescribed.isChecked()) {
-                            if (!btnImage.getText().toString().isEmpty()) {
-                                show("Please select item prescription.", v);
-                            }
+                        if (!prescribed.isChecked() && null != txtName && txtName.getText().toString().isEmpty()) {
+                            // if (txtName.getText().toString().isEmpty()) {
+                            show("Please enter item description.", v);
+                            // }
+                        } else if (prescribed.isChecked() && null != btnImage && !btnImage.getText().toString().isEmpty()) {
+                            //if (!btnImage.getText().toString().isEmpty()) {
+                            show("Please select item prescription.", v);
+                            // }
                         } else if (txtQty.getText().toString().isEmpty()) {
                             show("Please enter qty for item.", v);
                         } else if (!txtQty.getText().toString().isEmpty() && Integer.parseInt(txtQty.getText().toString().trim()) > 16) {
                             show(getString(R.string.lbl_more_than_16_qty), v);
-                        } else if (!isNotUnique()) {
+                        } else if (!isNotUnique() ) {
                             show("Prescription name should not double", v);
                         } else {
-                            txtName.clearFocus();
+                            if (!prescribed.isChecked()) {
+                                txtName.clearFocus();
+                            }
                             txtQty.clearFocus();
                             indexCount = indexCount + 1;
                             View view = generate();
@@ -399,9 +404,8 @@ public class NewOrder extends JustOlmCompactActivity
             ((AppCompatTextView) view.findViewById(R.id.btnImage)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    selectedPrescribled = (int) finalView.getTag();
-
+                    //selectedPrescribled = (int) finalView.getTag();
+                    selectedPrescribled = lnrItems.indexOfChild(finalView);
                     dialog = image();
                     dialog.show();
 
@@ -687,6 +691,9 @@ public class NewOrder extends JustOlmCompactActivity
         return builder.create();
     }
 
+    /**
+     * @param request
+     */
     private void initOrder(InitOrderRequest request) {
         if (isConnected()) {
             if (ui != null && ui.size() > 0) {
@@ -705,51 +712,22 @@ public class NewOrder extends JustOlmCompactActivity
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (resultCode == RESULT_OK) {
-
             if (requestCode == GALLERY) {
-
                 Uri uri = data.getData();
-
                 try {
                     Bitmap image = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
-                    AppCompatTextView lblImage = (AppCompatTextView) lnrItems.getChildAt(0).findViewById(R.id.btnImage);
+                    AppCompatTextView lblImage = (AppCompatTextView) lnrItems.getChildAt(selectedPrescribled).findViewById(R.id.btnImage);
                     lblImage.setBackground(new BitmapDrawable(getResources(), image));
                     lblImage.setText("");
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             } else if (requestCode == CAMETA) {
-
-                // Uri uri = (Uri) data.getExtras().get("data");
-
-                // Uri uri = data.getData();
-
                 Bitmap image = (Bitmap) data.getExtras().get("data");
-
-                //   URI uri = URI.create(data.getExtras().get("data").toString());
-
-                //    Bitmap image = null;
-                /*try {*/
-                  /*  image = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);*/
-
-                AppCompatTextView lblImage = (AppCompatTextView) lnrItems.getChildAt(0).findViewById(R.id.btnImage);
-
+                AppCompatTextView lblImage = (AppCompatTextView) lnrItems.getChildAt(selectedPrescribled).findViewById(R.id.btnImage);
                 lblImage.setBackground(new BitmapDrawable(getResources(), image));
-
-
                 lblImage.setText("");
-
-                /*} catch (IOException e) {
-                    e.printStackTrace();
-                }*/
-
-                //Bitmap image = (Bitmap) data.getExtras().get("data");
-
-
             }
         }
 
