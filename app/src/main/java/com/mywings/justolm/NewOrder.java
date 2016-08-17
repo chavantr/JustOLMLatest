@@ -24,6 +24,7 @@ import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ import com.mywings.justolm.Model.UserMessage;
 import com.mywings.justolm.Process.InitOrder;
 import com.mywings.justolm.Process.OnInitOrderListener;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -169,7 +171,7 @@ public class NewOrder extends JustOlmCompactActivity
                             show("Please enter qty for item.", v);
                         } else if (!txtQty.getText().toString().isEmpty() && Integer.parseInt(txtQty.getText().toString().trim()) > 16) {
                             show(getString(R.string.lbl_more_than_16_qty), v);
-                        } else if (!isNotUnique() ) {
+                        } else if (!isNotUnique()) {
                             show("Prescription name should not double", v);
                         } else {
                             if (!prescribed.isChecked()) {
@@ -628,6 +630,12 @@ public class NewOrder extends JustOlmCompactActivity
         return builder.create();
     }
 
+    public static String encodeToBase64(Bitmap image, Bitmap.CompressFormat compressFormat, int quality) {
+        ByteArrayOutputStream byteArrayOS = new ByteArrayOutputStream();
+        image.compress(compressFormat, quality, byteArrayOS);
+        return Base64.encodeToString(byteArrayOS.toByteArray(), Base64.DEFAULT);
+    }
+
 
     private InitOrderRequest generate(Map<Integer, View> ui) {
         InitOrderRequest request = InitOrderRequest.getInstance();
@@ -641,14 +649,28 @@ public class NewOrder extends JustOlmCompactActivity
             for (int i = 0; i < ui.size(); i++) {
                 Items item = new Items();
                 View view = ui.get(i);
-                AppCompatEditText txtName = (AppCompatEditText) view.findViewById(R.id.txtName);
+                AppCompatEditText txtName = null;
+                AppCompatTextView btnImage = null;
+                if (prescribed.isChecked()) {
+                    btnImage = (AppCompatTextView) view.findViewById(R.id.btnImage);
+                } else {
+                    txtName = (AppCompatEditText) view.findViewById(R.id.txtName);
+                }
                 AppCompatEditText txtQty = (AppCompatEditText) view.findViewById(R.id.txtQty);
                 AppCompatSpinner spnSchedule = (AppCompatSpinner) view.findViewById(R.id.spnScheduler);
                 item.setPeriod("1");
                 item.setSchedular(spnSchedule.getSelectedItem().toString());
-                item.setItemPhoto("");
+                if (prescribed.isChecked()) {
+                    BitmapDrawable imageDrawable = (BitmapDrawable) btnImage.getBackground();
+                    Bitmap imageto64 = imageDrawable.getBitmap();
+                    item.setItemPhoto(encodeToBase64(imageto64, Bitmap.CompressFormat.JPEG, 100));
+                    item.setItemName("");
+                } else {
+                    item.setItemPhoto("");
+                    item.setItemName(txtName.getText().toString());
+                }
                 item.setQuantity(txtQty.getText().toString());
-                item.setItemName(txtName.getText().toString());
+
                 items.add(item);
             }
             request.setItems(items);

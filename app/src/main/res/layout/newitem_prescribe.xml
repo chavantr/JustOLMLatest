@@ -83,6 +83,7 @@
             android:id="@+id/rlName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
             android:orientation="horizontal"
             android:padding="3dp"
             android:weightSum="100">
@@ -92,6 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="50"
+
                 android:singleLine="true"
                 android:text="@string/quantity"
                 android:textColor="@color/colorPrimaryTitle"
@@ -121,6 +123,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlName"
+            android:layout_marginLeft="7dp"
             android:gravity="center_vertical"
             android:padding="3dp">
 
@@ -158,6 +161,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rlScheduler"
+            android:layout_marginLeft="7dp"
             android:padding="3dp">
 
             <android.support.v7.widget.AppCompatTextView
